@@ -1,0 +1,2065 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>麻豆日历表_影像日程社区|记录每个值得被看见的日子</title>
+<meta name="description" content="麻豆日历表官方网站，以日历为线索的影像日程社区，汇聚原创视频、创作者与每日影像记录，为企业与创作者搭建高品质内容生态。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e2703a'/%3E%3Crect x='12' y='18' width='40' height='34' rx='5' fill='%23fff8f0'/%3E%3Crect x='12' y='18' width='40' height='9' rx='4' fill='%23b7481f'/%3E%3Ccircle cx='22' cy='14' r='3' fill='%23fff8f0'/%3E%3Ccircle cx='42' cy='14' r='3' fill='%23fff8f0'/%3E%3Crect x='19' y='33' width='8' height='7' rx='2' fill='%23e2703a'/%3E%3Crect x='30' y='33' width='8' height='7' rx='2' fill='%23f0b48a'/%3E%3Crect x='19' y='43' width='8' height='7' rx='2' fill='%23f0b48a'/%3E%3Crect x='30' y='43' width='8' height='7' rx='2' fill='%23e2703a'/%3E%3C/svg%3E">
+<style>
+:root{
+  --md-day-bg:#fdf7ef;
+  --md-day-paper:#fffdf9;
+  --md-day-ink:#2f2620;
+  --md-day-ink-soft:#6b5c50;
+  --md-day-line:#eadccb;
+  --md-day-amber:#e2703a;
+  --md-day-amber-deep:#b7481f;
+  --md-day-cream:#f7e8d5;
+  --md-day-shadow:0 14px 34px rgba(120,74,40,.12);
+  --md-day-radius:18px;
+  --md-day-radius-sm:12px;
+  --md-day-max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  background:var(--md-day-bg);
+  color:var(--md-day-ink);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+ul{list-style:none}
+.md-day-wrap{max-width:var(--md-day-max);margin:0 auto;padding:0 22px}
+
+/* 公告条 */
+.md-day-notice{
+  background:linear-gradient(90deg,#3a2a1e,#5a3a26 55%,#b7481f);
+  color:#fbe9d8;font-size:13.5px;
+}
+.md-day-notice .md-day-wrap{display:flex;align-items:center;gap:12px;min-height:40px;padding-top:6px;padding-bottom:6px}
+.md-day-notice-tag{
+  flex:0 0 auto;background:#f6c88f;color:#3a2413;font-weight:700;
+  font-size:12px;padding:2px 9px;border-radius:999px;letter-spacing:.5px;
+}
+.md-day-notice-text{flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.md-day-notice-text strong{color:#ffd9ac}
+.md-day-notice-link{flex:0 0 auto;color:#ffd9ac;font-weight:600;border-bottom:1px dashed #ffd9ac}
+
+/* 页头 */
+.md-day-header{
+  position:sticky;top:0;z-index:60;
+  background:rgba(253,247,239,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--md-day-line);
+}
+.md-day-header-inner{
+  display:flex;align-items:center;gap:20px;
+  min-height:68px;
+}
+.md-day-brand{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.md-day-brand-mark{
+  width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(140deg,#e2703a,#b7481f);
+  display:grid;place-items:center;color:#fff;font-weight:800;font-size:17px;
+  box-shadow:0 6px 14px rgba(183,72,31,.3);
+}
+.md-day-brand-name{font-size:19px;font-weight:800;letter-spacing:.5px}
+.md-day-brand-sub{font-size:11px;color:var(--md-day-ink-soft);letter-spacing:2px}
+.md-day-nav{display:flex;gap:4px;flex:1 1 auto;justify-content:center;flex-wrap:wrap}
+.md-day-nav a{
+  font-size:14.5px;padding:8px 13px;border-radius:999px;color:var(--md-day-ink-soft);
+  transition:.22s;font-weight:500;
+}
+.md-day-nav a:hover,.md-day-nav a.is-active{background:var(--md-day-cream);color:var(--md-day-amber-deep);font-weight:700}
+.md-day-header-tools{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.md-day-search{position:relative;display:flex;align-items:center}
+.md-day-search input{
+  width:190px;padding:8px 34px 8px 14px;border-radius:999px;
+  border:1px solid var(--md-day-line);background:#fffdf9;font-size:13.5px;color:var(--md-day-ink);
+  outline:none;transition:.22s;
+}
+.md-day-search input:focus{border-color:var(--md-day-amber);box-shadow:0 0 0 3px rgba(226,112,58,.14);width:220px}
+.md-day-search button{
+  position:absolute;right:5px;top:50%;transform:translateY(-50%);
+  width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  color:var(--md-day-amber-deep);font-size:14px;
+}
+.md-day-search-hint{
+  position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fffdf9;
+  border:1px solid var(--md-day-line);border-radius:12px;box-shadow:var(--md-day-shadow);
+  padding:8px;font-size:13px;color:var(--md-day-ink-soft);display:none;z-index:80;
+}
+.md-day-search-hint.is-open{display:block}
+.md-day-search-hint b{color:var(--md-day-amber-deep)}
+.md-day-burger{
+  display:none;width:40px;height:40px;border-radius:11px;border:1px solid var(--md-day-line);
+  background:#fffdf9;place-items:center;
+}
+.md-day-burger span{display:block;width:18px;height:2px;background:var(--md-day-ink);border-radius:2px;position:relative}
+.md-day-burger span::before,.md-day-burger span::after{
+  content:"";position:absolute;left:0;width:18px;height:2px;background:var(--md-day-ink);border-radius:2px;
+}
+.md-day-burger span::before{top:-6px}
+.md-day-burger span::after{top:6px}
+.md-day-btn{
+  display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:999px;
+  font-size:14px;font-weight:700;transition:.22s;white-space:nowrap;
+}
+.md-day-btn--solid{background:linear-gradient(135deg,#e2703a,#b7481f);color:#fff;box-shadow:0 8px 18px rgba(183,72,31,.28)}
+.md-day-btn--solid:hover{transform:translateY(-1px);box-shadow:0 12px 22px rgba(183,72,31,.34)}
+.md-day-btn--ghost{border:1.5px solid var(--md-day-amber);color:var(--md-day-amber-deep);background:transparent}
+.md-day-btn--ghost:hover{background:var(--md-day-cream)}
+
+/* 首屏 */
+.md-day-hero{padding:46px 0 20px;position:relative;overflow:hidden}
+.md-day-hero::before{
+  content:"";position:absolute;right:-160px;top:-120px;width:460px;height:460px;border-radius:50%;
+  background:radial-gradient(circle,rgba(226,112,58,.16),transparent 68%);pointer-events:none;
+}
+.md-day-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;position:relative;z-index:1}
+.md-day-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:1.5px;
+  color:var(--md-day-amber-deep);background:var(--md-day-cream);padding:5px 13px;border-radius:999px;margin-bottom:16px;
+}
+.md-day-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--md-day-amber)}
+.md-day-hero h1{
+  font-size:clamp(34px,4.6vw,52px);line-height:1.18;font-weight:900;letter-spacing:1px;
+  margin-bottom:16px;
+}
+.md-day-hero h1 em{
+  font-style:normal;color:var(--md-day-amber-deep);
+  background:linear-gradient(180deg,transparent 62%,rgba(226,112,58,.28) 62%);
+}
+.md-day-hero-lead{font-size:15.5px;color:var(--md-day-ink-soft);margin-bottom:22px;max-width:540px}
+.md-day-hero-stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+.md-day-stat{
+  background:#fffdf9;border:1px solid var(--md-day-line);border-radius:var(--md-day-radius-sm);
+  padding:12px 18px;min-width:118px;box-shadow:0 4px 12px rgba(120,74,40,.05);
+}
+.md-day-stat-num{font-size:23px;font-weight:900;color:var(--md-day-amber-deep);line-height:1.2}
+.md-day-stat-label{font-size:12px;color:var(--md-day-ink-soft);letter-spacing:.5px}
+.md-day-hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.md-day-hero-visual{position:relative}
+.md-day-hero-card{
+  border-radius:22px;overflow:hidden;box-shadow:var(--md-day-shadow);border:1px solid var(--md-day-line);
+  background:#fff;position:relative;
+}
+.md-day-hero-card svg{width:100%;height:auto;display:block}
+.md-day-hero-badge{
+  position:absolute;left:16px;top:16px;background:rgba(47,38,32,.78);color:#ffe6cc;
+  font-size:12px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:999px;backdrop-filter:blur(4px);
+}
+.md-day-hero-caption{
+  position:absolute;left:16px;right:16px;bottom:16px;color:#fff;
+  background:linear-gradient(90deg,rgba(47,26,14,.82),rgba(47,26,14,.2));
+  padding:10px 14px;border-radius:12px;font-size:13.5px;font-weight:600;
+}
+
+/* 通用 section */
+.md-day-section{padding:52px 0}
+.md-day-section--alt{background:linear-gradient(180deg,#fffaf3,#fdf1e3)}
+.md-day-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:28px;flex-wrap:wrap}
+.md-day-section-title h2{font-size:clamp(22px,2.8vw,30px);font-weight:900;letter-spacing:.5px;line-height:1.3}
+.md-day-section-title p{font-size:14px;color:var(--md-day-ink-soft);margin-top:6px}
+.md-day-section-more{font-size:13.5px;font-weight:700;color:var(--md-day-amber-deep);border-bottom:2px solid rgba(183,72,31,.28);padding-bottom:2px}
+
+/* 焦点视频 */
+.md-day-focus{display:grid;grid-template-columns:1.35fr 1fr;gap:20px}
+.md-day-focus-main{
+  position:relative;border-radius:var(--md-day-radius);overflow:hidden;background:#2a1d13;box-shadow:var(--md-day-shadow);
+  display:flex;flex-direction:column;
+}
+.md-day-focus-main svg{width:100%;height:auto;display:block}
+.md-day-focus-main-body{padding:18px 20px 20px;color:#fff}
+.md-day-focus-main-body h3{font-size:20px;font-weight:800;margin-bottom:6px}
+.md-day-focus-main-body p{font-size:13.5px;color:#e8d5c2;margin-bottom:10px}
+.md-day-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:#f0c9a6}
+.md-day-focus-side{display:grid;gap:14px}
+.md-day-focus-mini{
+  display:flex;gap:13px;background:#fffdf9;border:1px solid var(--md-day-line);border-radius:var(--md-day-radius-sm);
+  padding:10px;transition:.22s;box-shadow:0 4px 12px rgba(120,74,40,.05);align-items:center;
+}
+.md-day-focus-mini:hover{transform:translateY(-3px);box-shadow:var(--md-day-shadow);border-color:#f0c9a6}
+.md-day-focus-mini-thumb{
+  flex:0 0 132px;border-radius:9px;overflow:hidden;position:relative;
+}
+.md-day-focus-mini-thumb svg{width:100%;height:auto;display:block}
+.md-day-focus-mini-body h4{font-size:14px;font-weight:700;line-height:1.45;margin-bottom:4px}
+.md-day-focus-mini-body p{font-size:12px;color:var(--md-day-ink-soft)}
+.md-day-focus-mini-body .md-day-mini-tag{font-size:11px;color:var(--md-day-amber-deep);font-weight:700}
+
+/* 视频卡片流 */
+.md-day-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.md-day-card{
+  background:#fffdf9;border:1px solid var(--md-day-line);border-radius:var(--md-day-radius);overflow:hidden;
+  display:flex;flex-direction:column;transition:.24s;box-shadow:0 5px 14px rgba(120,74,40,.06);
+}
+.md-day-card:hover{transform:translateY(-5px);box-shadow:var(--md-day-shadow);border-color:#f0c9a6}
+.md-day-card-cover{position:relative;overflow:hidden}
+.md-day-card-cover svg{width:100%;height:auto;display:block;transition:transform .4s}
+.md-day-card:hover .md-day-card-cover svg{transform:scale(1.035)}
+.md-day-cover-tag{
+  position:absolute;left:12px;top:12px;background:rgba(255,253,249,.92);color:var(--md-day-amber-deep);
+  font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:999px;letter-spacing:.5px;
+}
+.md-day-cover-dur{
+  position:absolute;right:12px;bottom:12px;background:rgba(47,26,14,.82);color:#ffe6cc;
+  font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:6px;
+}
+.md-day-card-body{padding:15px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.md-day-card-body h3{font-size:15.5px;font-weight:800;line-height:1.5}
+.md-day-card-body p{font-size:13px;color:var(--md-day-ink-soft);line-height:1.62;flex:1}
+.md-day-card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.md-day-author{display:flex;align-items:center;gap:8px}
+.md-day-avatar{
+  width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+  font-size:12px;font-weight:800;color:#fff;flex:0 0 auto;
+}
+.md-day-avatar--a{background:linear-gradient(135deg,#e2703a,#b7481f)}
+.md-day-avatar--b{background:linear-gradient(135deg,#4f7f6b,#2f5b4c)}
+.md-day-avatar--c{background:linear-gradient(135deg,#7a6bb8,#4f4488)}
+.md-day-avatar--d{background:linear-gradient(135deg,#c98a2a,#9a6418)}
+.md-day-avatar--e{background:linear-gradient(135deg,#b8567e,#86345a)}
+.md-day-author-name{font-size:12.5px;font-weight:700;color:var(--md-day-ink-soft)}
+.md-day-card-actions{display:flex;gap:6px}
+.md-day-act{
+  display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;
+  color:var(--md-day-ink-soft);background:#fdf3e7;padding:4px 9px;border-radius:999px;transition:.18s;
+}
+.md-day-act:hover{background:var(--md-day-cream);color:var(--md-day-amber-deep)}
+.md-day-act.is-liked{background:rgba(226,112,58,.16);color:var(--md-day-amber-deep)}
+.md-day-act.is-saved{background:rgba(183,72,31,.16);color:var(--md-day-amber-deep)}
+
+/* 标签筛选 */
+.md-day-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.md-day-filter button{
+  font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;
+  border:1px solid var(--md-day-line);background:#fffdf9;color:var(--md-day-ink-soft);transition:.2s;
+}
+.md-day-filter button.is-on{background:var(--md-day-amber);border-color:var(--md-day-amber);color:#fff}
+
+/* 专题 */
+.md-day-topics{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.md-day-topic{
+  background:#fffdf9;border:1px solid var(--md-day-line);border-radius:var(--md-day-radius);overflow:hidden;
+  transition:.24s;box-shadow:0 5px 14px rgba(120,74,40,.06);
+}
+.md-day-topic:hover{transform:translateY(-4px);box-shadow:var(--md-day-shadow)}
+.md-day-topic svg{width:100%;height:auto;display:block}
+.md-day-topic-body{padding:14px 15px 16px}
+.md-day-topic-body h3{font-size:15px;font-weight:800;margin-bottom:5px}
+.md-day-topic-body p{font-size:12.5px;color:var(--md-day-ink-soft);line-height:1.6;margin-bottom:9px}
+.md-day-topic-status{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;color:var(--md-day-amber-deep)}
+.md-day-topic-status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--md-day-amber);animation:mdDayPulse 1.8s infinite}
+@keyframes mdDayPulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* 创作者 */
+.md-day-creators{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.md-day-creator{
+  background:#fffdf9;border:1px solid var(--md-day-line);border-radius:var(--md-day-radius);padding:18px;
+  display:flex;gap:14px;transition:.24s;box-shadow:0 5px 14px rgba(120,74,40,.06);
+}
+.md-day-creator:hover{transform:translateY(-4px);box-shadow:var(--md-day-shadow);border-color:#f0c9a6}
+.md-day-creator-avatar{
+  width:56px;height:56px;border-radius:16px;flex:0 0 auto;display:grid;place-items:center;
+  color:#fff;font-size:21px;font-weight:900;letter-spacing:1px;
+}
+.md-day-creator-info h3{font-size:15.5px;font-weight:800;margin-bottom:2px}
+.md-day-creator-field{font-size:12px;color:var(--md-day-amber-deep);font-weight:700;margin-bottom:6px}
+.md-day-creator-info p{font-size:12.5px;color:var(--md-day-ink-soft);line-height:1.6;margin-bottom:8px}
+.md-day-creator-data{display:flex;gap:14px;font-size:12px;color:var(--md-day-ink-soft)}
+.md-day-creator-data b{color:var(--md-day-ink);font-weight:800}
+
+/* 深度解析长文 */
+.md-day-about{
+  background:#fffdf9;border:1px solid var(--md-day-line);border-radius:24px;
+  padding:clamp(24px,4vw,46px);box-shadow:0 10px 26px rgba(120,74,40,.07);
+}
+.md-day-about h2{font-size:clamp(22px,2.8vw,29px);font-weight:900;margin-bottom:16px;letter-spacing:.5px}
+.md-day-about p{font-size:14.6px;color:#4b3d33;margin-bottom:15px;text-align:justify}
+.md-day-about p strong{color:var(--md-day-amber-deep)}
+.md-day-about-cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+.md-day-about-card{
+  background:#fdf6ec;border:1px solid var(--md-day-line);border-radius:16px;padding:18px 20px;
+}
+.md-day-about-card h3{font-size:15.5px;font-weight:800;margin-bottom:7px;color:var(--md-day-amber-deep)}
+.md-day-about-card p{font-size:13.4px;color:var(--md-day-ink-soft);margin:0;text-align:left}
+
+/* 影像墙 */
+.md-day-wall{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.md-day-wall-item{
+  border-radius:var(--md-day-radius-sm);overflow:hidden;border:1px solid var(--md-day-line);position:relative;
+  transition:.24s;background:#fff;box-shadow:0 4px 12px rgba(120,74,40,.06);
+}
+.md-day-wall-item:hover{transform:translateY(-4px);box-shadow:var(--md-day-shadow)}
+.md-day-wall-item svg{width:100%;height:auto;display:block}
+.md-day-wall-item--big{grid-column:span 2;grid-row:span 2}
+.md-day-wall-cap{
+  position:absolute;left:0;right:0;bottom:0;padding:10px 12px;color:#fff;font-size:12.5px;font-weight:700;
+  background:linear-gradient(180deg,transparent,rgba(47,26,14,.82));
+}
+
+/* 评价 */
+.md-day-reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.md-day-review{
+  background:#fffdf9;border:1px solid var(--md-day-line);border-radius:var(--md-day-radius-sm);
+  padding:16px 18px;box-shadow:0 4px 12px rgba(120,74,40,.05);display:flex;flex-direction:column;gap:10px;
+}
+.md-day-review-head{display:flex;align-items:center;gap:10px}
+.md-day-review-name{font-size:13.5px;font-weight:800}
+.md-day-review-date{font-size:11.5px;color:#a49283}
+.md-day-review p{font-size:13.2px;color:#4b3d33;line-height:1.68}
+.md-day-stars{color:#e2703a;font-size:12.5px;letter-spacing:2px}
+
+/* 动态与FAQ */
+.md-day-split{display:grid;grid-template-columns:1fr 1.15fr;gap:30px;align-items:start}
+.md-day-news-list{display:grid;gap:12px}
+.md-day-news{
+  display:flex;gap:14px;padding:14px 16px;background:#fffdf9;border:1px solid var(--md-day-line);
+  border-radius:var(--md-day-radius-sm);transition:.2s;
+}
+.md-day-news:hover{border-color:#f0c9a6;box-shadow:0 6px 16px rgba(120,74,40,.08)}
+.md-day-news-date{
+  flex:0 0 auto;width:56px;text-align:center;font-size:11px;color:var(--md-day-amber-deep);
+  font-weight:800;line-height:1.3;border-right:1px dashed var(--md-day-line);padding-right:10px;
+}
+.md-day-news-date b{display:block;font-size:19px;color:var(--md-day-ink)}
+.md-day-news h3{font-size:14px;font-weight:800;margin-bottom:3px}
+.md-day-news p{font-size:12.5px;color:var(--md-day-ink-soft)}
+.md-day-faq{display:grid;gap:10px}
+.md-day-faq details{
+  background:#fffdf9;border:1px solid var(--md-day-line);border-radius:var(--md-day-radius-sm);
+  padding:0 16px;transition:.2s;
+}
+.md-day-faq details[open]{border-color:#f0c9a6;box-shadow:0 6px 16px rgba(120,74,40,.08)}
+.md-day-faq summary{
+  list-style:none;cursor:pointer;padding:14px 26px 14px 0;font-size:14px;font-weight:700;
+  position:relative;color:var(--md-day-ink);
+}
+.md-day-faq summary::-webkit-details-marker{display:none}
+.md-day-faq summary::after{
+  content:"+";position:absolute;right:0;top:50%;transform:translateY(-50%);
+  font-size:19px;color:var(--md-day-amber-deep);font-weight:600;line-height:1;
+}
+.md-day-faq details[open] summary::after{content:"−"}
+.md-day-faq details p{font-size:13.2px;color:var(--md-day-ink-soft);padding-bottom:15px;line-height:1.7}
+
+/* 品牌伙伴 */
+.md-day-partners{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.md-day-partner{
+  background:#fffdf9;border:1px dashed var(--md-day-line);border-radius:var(--md-day-radius-sm);
+  padding:18px 12px;text-align:center;transition:.22s;
+}
+.md-day-partner:hover{border-style:solid;border-color:var(--md-day-amber);background:#fdf6ec}
+.md-day-partner b{display:block;font-size:14px;font-weight:800;letter-spacing:.5px}
+.md-day-partner span{font-size:11.5px;color:var(--md-day-ink-soft)}
+
+/* 投稿/联系 */
+.md-day-cta{
+  background:linear-gradient(120deg,#3a2517,#6b3a1f 60%,#b7481f);
+  border-radius:26px;padding:clamp(28px,4.5vw,48px);color:#fbe9d8;position:relative;overflow:hidden;
+}
+.md-day-cta::after{
+  content:"";position:absolute;right:-70px;bottom:-90px;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(246,200,143,.28),transparent 70%);
+}
+.md-day-cta h2{font-size:clamp(22px,3vw,30px);font-weight:900;margin-bottom:10px;color:#fff}
+.md-day-cta p{font-size:14px;color:#f3d8bd;max-width:640px;margin-bottom:22px}
+.md-day-cta-actions{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
+.md-day-cta .md-day-btn--solid{background:#fff;color:#8a3a17;box-shadow:0 10px 22px rgba(0,0,0,.22)}
+.md-day-cta .md-day-btn--ghost{border-color:#f3d8bd;color:#fbe9d8}
+.md-day-cta .md-day-btn--ghost:hover{background:rgba(255,255,255,.12)}
+
+/* 页脚 */
+.md-day-footer{background:#2b1d14;color:#cbb4a2;padding:44px 0 22px;margin-top:56px}
+.md-day-footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:28px;margin-bottom:28px}
+.md-day-footer h3{color:#f6dcc2;font-size:15px;font-weight:800;margin-bottom:12px;letter-spacing:.5px}
+.md-day-footer p,.md-day-footer li{font-size:12.8px;line-height:1.9;color:#b79e8b}
+.md-day-footer li a:hover{color:#f6c88f}
+.md-day-footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.md-day-footer-brand .md-day-brand-mark{background:linear-gradient(140deg,#e2703a,#8a3a17)}
+.md-day-footer-brand b{color:#fbe9d8;font-size:17px;letter-spacing:.5px}
+.md-day-footer-bottom{
+  border-top:1px solid rgba(246,220,194,.16);padding-top:18px;display:flex;
+  justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12px;color:#a08a78;
+}
+.md-day-footer-bottom a:hover{color:#f6c88f}
+
+/* 回到顶部 & Toast */
+.md-day-totop{
+  position:fixed;right:22px;bottom:26px;width:46px;height:46px;border-radius:50%;
+  background:linear-gradient(135deg,#e2703a,#b7481f);color:#fff;font-size:18px;font-weight:800;
+  display:grid;place-items:center;box-shadow:0 10px 22px rgba(183,72,31,.36);
+  opacity:0;visibility:hidden;transform:translateY(12px);transition:.3s;z-index:90;
+}
+.md-day-totop.is-show{opacity:1;visibility:visible;transform:translateY(0)}
+.md-day-toast{
+  position:fixed;left:50%;bottom:40px;transform:translate(-50%,18px);z-index:120;
+  background:#2f2620;color:#ffe6cc;font-size:13.5px;font-weight:600;padding:11px 22px;border-radius:999px;
+  box-shadow:0 12px 30px rgba(0,0,0,.3);opacity:0;visibility:hidden;transition:.3s;white-space:nowrap;
+}
+.md-day-toast.is-show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+
+/* 弹窗 */
+.md-day-modal{
+  position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:20px;
+  background:rgba(43,29,20,.55);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.26s;
+}
+.md-day-modal.is-open{opacity:1;visibility:visible}
+.md-day-modal-box{
+  width:100%;max-width:460px;background:#fffdf9;border-radius:20px;padding:26px 24px;position:relative;
+  box-shadow:0 24px 60px rgba(0,0,0,.28);transform:translateY(14px);transition:.26s;
+  max-height:86vh;overflow:auto;
+}
+.md-day-modal.is-open .md-day-modal-box{transform:translateY(0)}
+.md-day-modal-box h3{font-size:19px;font-weight:900;margin-bottom:6px}
+.md-day-modal-box .md-day-modal-sub{font-size:13px;color:var(--md-day-ink-soft);margin-bottom:16px}
+.md-day-modal-close{
+  position:absolute;right:14px;top:14px;width:30px;height:30px;border-radius:50%;
+  background:#f4e9db;color:#7a6453;font-size:16px;display:grid;place-items:center;font-weight:700;
+}
+.md-day-modal-close:hover{background:#ecdcc8}
+.md-day-field{margin-bottom:13px}
+.md-day-field label{display:block;font-size:12.5px;font-weight:700;margin-bottom:5px;color:var(--md-day-ink-soft)}
+.md-day-field input,.md-day-field textarea,.md-day-field select{
+  width:100%;padding:9px 12px;border:1px solid var(--md-day-line);border-radius:10px;
+  font-size:13.5px;font-family:inherit;background:#fff;color:var(--md-day-ink);outline:none;transition:.2s;
+}
+.md-day-field input:focus,.md-day-field textarea:focus,.md-day-field select:focus{border-color:var(--md-day-amber);box-shadow:0 0 0 3px rgba(226,112,58,.13)}
+.md-day-field textarea{resize:vertical;min-height:82px}
+.md-day-share-row{display:flex;gap:10px;flex-wrap:wrap}
+.md-day-share-row a,.md-day-share-row button{
+  flex:1 1 88px;text-align:center;padding:10px 8px;border-radius:11px;font-size:13px;font-weight:700;
+  background:#fdf3e7;color:var(--md-day-amber-deep);border:1px solid var(--md-day-line);transition:.2s;
+}
+.md-day-share-row a:hover,.md-day-share-row button:hover{background:var(--md-day-cream);border-color:#f0c9a6}
+.md-day-comment-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed var(--md-day-line)}
+.md-day-comment-item:last-child{border-bottom:none}
+.md-day-comment-item p{font-size:13px;color:#4b3d33}
+.md-day-comment-item span{font-size:11.5px;color:#a49283}
+
+/* 响应式 */
+@media (max-width:980px){
+  .md-day-hero-grid{grid-template-columns:1fr;gap:30px}
+  .md-day-focus{grid-template-columns:1fr}
+  .md-day-card-grid{grid-template-columns:repeat(2,1fr)}
+  .md-day-topics{grid-template-columns:repeat(2,1fr)}
+  .md-day-creators{grid-template-columns:repeat(2,1fr)}
+  .md-day-reviews{grid-template-columns:repeat(2,1fr)}
+  .md-day-split{grid-template-columns:1fr}
+  .md-day-partners{grid-template-columns:repeat(3,1fr)}
+  .md-day-footer-grid{grid-template-columns:1fr 1fr}
+  .md-day-about-cols{grid-template-columns:1fr}
+  .md-day-nav{display:none}
+  .md-day-header-inner{gap:12px}
+  .md-day-search input{width:150px}
+  .md-day-search input:focus{width:170px}
+  .md-day-burger{display:grid}
+  .md-day-nav.is-open{
+    display:flex;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:2px;
+    background:#fffdf9;border-bottom:1px solid var(--md-day-line);padding:12px 22px 18px;
+    box-shadow:0 16px 30px rgba(120,74,40,.12);
+  }
+  .md-day-nav.is-open a{padding:11px 8px;border-radius:10px}
+  .md-day-wall{grid-template-columns:repeat(2,1fr)}
+  .md-day-wall-item--big{grid-column:span 2;grid-row:auto}
+}
+@media (max-width:640px){
+  .md-day-wrap{padding:0 16px}
+  .md-day-header-tools .md-day-btn--solid{display:none}
+  .md-day-search input{width:118px}
+  .md-day-search input:focus{width:140px}
+  .md-day-notice .md-day-wrap{flex-wrap:nowrap;font-size:12.5px}
+  .md-day-hero{padding-top:30px}
+  .md-day-card-grid{grid-template-columns:1fr}
+  .md-day-topics{grid-template-columns:1fr}
+  .md-day-creators{grid-template-columns:1fr}
+  .md-day-reviews{grid-template-columns:1fr}
+  .md-day-partners{grid-template-columns:repeat(2,1fr)}
+  .md-day-footer-grid{grid-template-columns:1fr}
+  .md-day-stat{min-width:100px;padding:10px 14px}
+  .md-day-focus-mini-thumb{flex-basis:110px}
+  .md-day-wall{grid-template-columns:1fr}
+  .md-day-wall-item--big{grid-column:span 1}
+  .md-day-totop{right:14px;bottom:18px}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- 公告条 -->
+<div class="md-day-notice" id="mdDayNotice">
+  <div class="md-day-wrap">
+    <span class="md-day-notice-tag">最新更新</span>
+    <div class="md-day-notice-text">
+      <strong>11月19日</strong> 新增「冬日手账周」日历专题 12 条影像条目；「剪辑七日谈」第 5 期已上线，投稿通道同步开启。
+    </div>
+    <a class="md-day-notice-link" href="#mdDayNews">查看动态</a>
+  </div>
+</div>
+
+<!-- 页头 -->
+<header class="md-day-header" id="mdDayHeader">
+  <div class="md-day-wrap md-day-header-inner">
+    <a class="md-day-brand" href="#mdDayTop">
+      <span class="md-day-brand-mark">麻</span>
+      <span>
+        <span class="md-day-brand-name">麻豆日历表</span><br>
+        <span class="md-day-brand-sub">MATRIX CALENDAR</span>
+      </span>
+    </a>
+    <nav class="md-day-nav" id="mdDayNav">
+      <a href="#mdDayTop" class="is-active">首页</a>
+      <a href="#mdDayFocus">焦点影像</a>
+      <a href="#mdDayFeed">日历视频</a>
+      <a href="#mdDayTopics">专题企划</a>
+      <a href="#mdDayCreators">创作者</a>
+      <a href="#mdDayAbout">品牌解析</a>
+      <a href="#mdDayNews">企业动态</a>
+      <a href="#mdDayContact">联系我们</a>
+    </nav>
+    <div class="md-day-header-tools">
+      <div class="md-day-search">
+        <input type="text" id="mdDaySearchInput" placeholder="搜索日历条目、创作者" aria-label="站内搜索">
+        <button type="button" id="mdDaySearchBtn" aria-label="搜索">⌕</button>
+        <div class="md-day-search-hint" id="mdDaySearchHint"></div>
+      </div>
+      <a class="md-day-btn md-day-btn--solid" href="#mdDayContact">投稿入口</a>
+      <button class="md-day-burger" id="mdDayBurger" aria-label="展开导航" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="mdDayTop">
+
+  <!-- 首屏 -->
+  <section class="md-day-hero">
+    <div class="md-day-wrap md-day-hero-grid">
+      <div>
+        <span class="md-day-eyebrow">麻豆日历表官方网站</span>
+        <h1>麻豆日历表</h1>
+        <p class="md-day-hero-lead">
+          以「日历」为坐标的影像日程社区。每一天一格，每一格一段原创影像——
+          我们用日期串起创作者的真实记录，让好内容在时间里被看见、被收藏、被反复回看。
+        </p>
+        <div class="md-day-hero-stats">
+          <div class="md-day-stat">
+            <div class="md-day-stat-num" data-count="128000">128,000+</div>
+            <div class="md-day-stat-label">日历影像条目</div>
+          </div>
+          <div class="md-day-stat">
+            <div class="md-day-stat-num" data-count="3600">3,600+</div>
+            <div class="md-day-stat-label">入驻创作者</div>
+          </div>
+          <div class="md-day-stat">
+            <div class="md-day-stat-num" data-count="27">27</div>
+            <div class="md-day-stat-label">持续更新专题</div>
+          </div>
+        </div>
+        <div class="md-day-hero-actions">
+          <a class="md-day-btn md-day-btn--solid" href="#mdDayFeed">浏览今日日历</a>
+          <a class="md-day-btn md-day-btn--ghost" href="#mdDayAbout">了解品牌故事</a>
+          <button class="md-day-btn md-day-btn--ghost" type="button" id="mdDayInspireBtn">获取创作灵感</button>
+        </div>
+      </div>
+      <div class="md-day-hero-visual">
+        <div class="md-day-hero-card">
+          <span class="md-day-hero-badge">今日头条 · 11.19</span>
+          <svg viewBox="0 0 640 400" role="img" aria-label="麻豆日历表首屏主视觉：暖橙色日历网格与播放按钮">
+            <defs>
+              <linearGradient id="mdDayHeroBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#3a2517"/>
+                <stop offset=".55" stop-color="#8a4a24"/>
+                <stop offset="1" stop-color="#e2703a"/>
+              </linearGradient>
+              <linearGradient id="mdDayHeroCard" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#fff8ee"/>
+                <stop offset="1" stop-color="#f0dcc3"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="400" fill="url(#mdDayHeroBg)"/>
+            <circle cx="530" cy="70" r="110" fill="#f6c88f" opacity=".14"/>
+            <circle cx="110" cy="330" r="130" fill="#ffd9ac" opacity=".1"/>
+            <g transform="translate(112 58) rotate(-4)">
+              <rect x="0" y="0" width="300" height="272" rx="22" fill="url(#mdDayHeroCard)"/>
+              <rect x="0" y="0" width="300" height="54" rx="22" fill="#b7481f"/>
+              <rect x="0" y="34" width="300" height="20" fill="#b7481f"/>
+              <circle cx="46" cy="14" r="7" fill="#fbe9d8"/>
+              <circle cx="254" cy="14" r="7" fill="#fbe9d8"/>
+              <text x="150" y="36" font-family="sans-serif" font-size="20" font-weight="800" fill="#fbe9d8" text-anchor="middle">NOV · 2026</text>
+              <g fill="#e2703a">
+                <rect x="26" y="76" width="36" height="30" rx="7" opacity=".9"/>
+                <rect x="80" y="76" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="134" y="76" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="188" y="76" width="36" height="30" rx="7" opacity=".9"/>
+                <rect x="242" y="76" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="26" y="124" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="80" y="124" width="36" height="30" rx="7" opacity=".9"/>
+                <rect x="134" y="124" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="188" y="124" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="242" y="124" width="36" height="30" rx="7" opacity=".9"/>
+                <rect x="26" y="172" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="80" y="172" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="134" y="172" width="36" height="30" rx="7" opacity=".9"/>
+                <rect x="188" y="172" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="242" y="172" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="26" y="220" width="36" height="30" rx="7" opacity=".9"/>
+                <rect x="80" y="220" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="134" y="220" width="36" height="30" rx="7" opacity=".35"/>
+                <rect x="188" y="220" width="36" height="30" rx="7" opacity=".9"/>
+                <rect x="242" y="220" width="36" height="30" rx="7" opacity=".35"/>
+              </g>
+            </g>
+            <g transform="translate(438 196)">
+              <circle cx="0" cy="0" r="52" fill="#fff8ee" opacity=".95"/>
+              <circle cx="0" cy="0" r="52" fill="none" stroke="#e2703a" stroke-width="3" opacity=".6"/>
+              <path d="M-13 -20 L26 0 L-13 20 Z" fill="#b7481f"/>
+            </g>
+            <text x="470" y="128" font-family="sans-serif" font-size="15" font-weight="700" fill="#fbe9d8">日历即片单</text>
+            <text x="470" y="156" font-family="sans-serif" font-size="12.5" fill="#f0c9a6">每一格都有故事</text>
+          </svg>
+          <div class="md-day-hero-caption">冬日手账周 · 12 位创作者用镜头记录 7 天日常</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 焦点影像 -->
+  <section class="md-day-section" id="mdDayFocus">
+    <div class="md-day-wrap">
+      <div class="md-day-section-head">
+        <div class="md-day-section-title">
+          <h2>焦点影像</h2>
+          <p>编辑部本期重点推荐，为本月日历条目的高光片段。</p>
+        </div>
+        <a class="md-day-section-more" href="#mdDayFeed">全部焦点</a>
+      </div>
+      <div class="md-day-focus">
+        <article class="md-day-focus-main">
+          <svg viewBox="0 0 640 360" role="img" aria-label="焦点影像封面：冬日清晨的窗边日历与咖啡">
+            <defs>
+              <linearGradient id="mdDayFocusBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#2e3f4d"/>
+                <stop offset=".6" stop-color="#5c6f7e"/>
+                <stop offset="1" stop-color="#c9a878"/>
+              </linearGradient>
+            </defs>
+            <rect width="640" height="360" fill="url(#mdDayFocusBg)"/>
+            <rect x="0" y="0" width="640" height="360" fill="#1b1f24" opacity=".12"/>
+            <circle cx="520" cy="72" r="46" fill="#ffe1b8" opacity=".85"/>
+            <g opacity=".9">
+              <rect x="58" y="150" width="200" height="150" rx="12" fill="#efe3d1"/>
+              <rect x="58" y="150" width="200" height="34" rx="12" fill="#b7481f"/>
+              <rect x="58" y="172" width="200" height="12" fill="#b7481f"/>
+              <g fill="#c9b8a4">
+                <rect x="76" y="200" width="28" height="20" rx="4"/>
+                <rect x="114" y="200" width="28" height="20" rx="4"/>
+                <rect x="152" y="200" width="28" height="20" rx="4"/>
+                <rect x="190" y="200" width="28" height="20" rx="4"/>
+                <rect x="76" y="234" width="28" height="20" rx="4"/>
+                <rect x="114" y="234" width="28" height="20" rx="4"/>
+                <rect x="152" y="234" width="28" height="20" rx="4"/>
+                <rect x="190" y="234" width="28" height="20" rx="4"/>
+              </g>
+              <rect x="76" y="268" width="80" height="10" rx="5" fill="#e2703a" opacity=".7"/>
+            </g>
+            <g transform="translate(392 218)">
+              <ellipse cx="0" cy="52" rx="62" ry="12" fill="#1b1f24" opacity=".25"/>
+              <path d="M-40 -8 h80 l-10 54 h-60 z" fill="#f3e7d6"/>
+              <path d="M40 2 q20 4 0 22" fill="none" stroke="#f3e7d6" stroke-width="6"/>
+              <ellipse cx="0" cy="-8" rx="40" ry="10" fill="#e2703a" opacity=".85"/>
+            </g>
+            <path d="M0 340 L640 306 L640 360 L0 360 Z" fill="#14181c" opacity=".5"/>
+            <g transform="translate(60 62)">
+              <rect x="0" y="0" width="128" height="32" rx="16" fill="#000" opacity=".38"/>
+              <text x="16" y="21" font-family="sans-serif" font-size="13" font-weight="700" fill="#ffd9ac">编辑推荐</text>
+            </g>
+          </svg>
+          <div class="md-day-focus-main-body">
+            <h3>七日手账：把一天一格填满的三十天</h3>
+            <p>创作者「阿栎」用三十天连续记录自己的手账与剪辑日常，镜头从清晨的窗台推到深夜的台灯，节奏舒缓、细节扎实。</p>
+            <div class="md-day-meta">
+              <span>作者：阿栎的手账</span><span>1.2 万次播放</span><span>收藏 3,208</span><span>11 月 17 日更新</span>
+            </div>
+          </div>
+        </article>
+        <div class="md-day-focus-side">
+          <article class="md-day-focus-mini">
+            <div class="md-day-focus-mini-thumb">
+              <svg viewBox="0 0 132 74" role="img" aria-label="迷你封面：城市夜色与霓虹日历牌">
+                <rect width="132" height="74" fill="#232838"/>
+                <rect x="0" y="0" width="132" height="74" fill="#2f3a52" opacity=".7"/>
+                <g fill="#f6c88f" opacity=".85">
+                  <rect x="12" y="16" width="14" height="42" rx="3"/>
+                  <rect x="34" y="28" width="14" height="30" rx="3" opacity=".6"/>
+                  <rect x="56" y="10" width="14" height="48" rx="3"/>
+                  <rect x="78" y="24" width="14" height="34" rx="3" opacity=".6"/>
+                  <rect x="100" y="18" width="14" height="40" rx="3"/>
+                </g>
+                <rect x="0" y="58" width="132" height="16" fill="#141822" opacity=".8"/>
+                <circle cx="112" cy="20" r="10" fill="#e2703a" opacity=".85"/>
+              </svg>
+            </div>
+            <div class="md-day-focus-mini-body">
+              <h4>夜行日历：城市里的二十四个小时</h4>
+              <span class="md-day-mini-tag">城市探索</span>
+              <p>从凌晨四点的早餐铺到午夜的地铁口。</p>
+            </div>
+          </article>
+          <article class="md-day-focus-mini">
+            <div class="md-day-focus-mini-thumb">
+              <svg viewBox="0 0 132 74" role="img" aria-label="迷你封面：厨房里的铸铁锅与热气">
+                <rect width="132" height="74" fill="#f4e3cf"/>
+                <rect x="0" y="48" width="132" height="26" fill="#d7b48d"/>
+                <ellipse cx="66" cy="48" rx="34" ry="10" fill="#3a2a1e"/>
+                <path d="M40 48 h52 v14 a26 8 0 0 1 -52 0 z" fill="#5a3a26"/>
+                <path d="M92 50 q10 4 0 12" fill="none" stroke="#3a2a1e" stroke-width="4"/>
+                <g stroke="#c98a2a" stroke-width="3" opacity=".7">
+                  <path d="M56 26 q6 -10 0 -18"/>
+                  <path d="M70 30 q6 -10 0 -18"/>
+                  <path d="M84 26 q6 -10 0 -18"/>
+                </g>
+              </svg>
+            </div>
+            <div class="md-day-focus-mini-body">
+              <h4>一锅炖到底：秋冬厨房的省事法则</h4>
+              <span class="md-day-mini-tag">美食烹饪</span>
+              <p>三道菜共用一口锅的实操流程拆解。</p>
+            </div>
+          </article>
+          <article class="md-day-focus-mini">
+            <div class="md-day-focus-mini-thumb">
+              <svg viewBox="0 0 132 74" role="img" aria-label="迷你封面：剪辑时间轴与波形">
+                <rect width="132" height="74" fill="#2b2f3c"/>
+                <rect x="0" y="0" width="132" height="20" fill="#3a4050"/>
+                <g fill="#6ad0b0" opacity=".8">
+                  <rect x="8" y="8" width="30" height="6" rx="3"/>
+                  <rect x="42" y="8" width="18" height="6" rx="3" opacity=".5"/>
+                </g>
+                <g fill="#e2703a">
+                  <rect x="8" y="28" width="44" height="10" rx="3"/>
+                  <rect x="56" y="28" width="26" height="10" rx="3" opacity=".55"/>
+                  <rect x="86" y="28" width="38" height="10" rx="3"/>
+                  <rect x="8" y="44" width="22" height="8" rx="3" opacity=".6"/>
+                  <rect x="34" y="44" width="50" height="8" rx="3"/>
+                  <rect x="88" y="44" width="36" height="8" rx="3" opacity=".6"/>
+                </g>
+                <path d="M8 62 h116" stroke="#6ad0b0" stroke-width="2" stroke-dasharray="4 4" opacity=".6"/>
+              </svg>
+            </div>
+            <div class="md-day-focus-mini-body">
+              <h4>剪辑七日谈：把流水素材剪成故事</h4>
+              <span class="md-day-mini-tag">教程干货</span>
+              <p>第七期讲述时间轴上的呼吸感设计。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 日历视频流 -->
+  <section class="md-day-section md-day-section--alt" id="mdDayFeed">
+    <div class="md-day-wrap">
+      <div class="md-day-section-head">
+        <div class="md-day-section-title">
+          <h2>日历视频流</h2>
+          <p>按日期排列的原创内容，按标签筛选你关心的那一格。</p>
+        </div>
+        <a class="md-day-section-more" href="#mdDayContact">我要投稿</a>
+      </div>
+      <div class="md-day-filter" id="mdDayFilter">
+        <button type="button" class="is-on" data-filter="all">全部</button>
+        <button type="button" data-filter="日常记录">日常记录</button>
+        <button type="button" data-filter="教程干货">教程干货</button>
+        <button type="button" data-filter="城市探索">城市探索</button>
+        <button type="button" data-filter="美食烹饪">美食烹饪</button>
+        <button type="button" data-filter="兴趣同好">兴趣同好</button>
+      </div>
+      <div class="md-day-card-grid" id="mdDayCardGrid">
+
+        <article class="md-day-card" data-tag="日常记录">
+          <div class="md-day-card-cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="视频封面：冬日窗边的热牛奶与书桌">
+              <rect width="400" height="225" fill="#e8dccb"/>
+              <rect x="0" y="150" width="400" height="75" fill="#c9a878"/>
+              <rect x="34" y="42" width="150" height="110" rx="8" fill="#9fb6c4"/>
+              <rect x="34" y="42" width="150" height="110" rx="8" fill="#fff" opacity=".18"/>
+              <path d="M34 96 h150" stroke="#7d94a4" stroke-width="4"/>
+              <path d="M109 42 v110" stroke="#7d94a4" stroke-width="4"/>
+              <g transform="translate(240 96)">
+                <path d="M-34 -14 h68 l-8 66 h-52 z" fill="#fff8ee"/>
+                <path d="M34 4 q22 6 0 26" fill="none" stroke="#fff8ee" stroke-width="8"/>
+                <ellipse cx="0" cy="-14" rx="34" ry="9" fill="#b7481f" opacity=".85"/>
+                <path d="M-14 -34 q10 -14 0 -26" stroke="#c9b8a4" stroke-width="4" fill="none" opacity=".8"/>
+                <path d="M8 -32 q10 -14 0 -26" stroke="#c9b8a4" stroke-width="4" fill="none" opacity=".6"/>
+              </g>
+              <rect x="0" y="0" width="400" height="225" fill="#2f1c10" opacity=".1"/>
+            </svg>
+            <span class="md-day-cover-tag">日常记录</span>
+            <span class="md-day-cover-dur">09:24</span>
+          </div>
+          <div class="md-day-card-body">
+            <h3>十一月第一杯热牛奶：把早晨拉长二十分钟</h3>
+            <p>记录入冬后第一个不用赶早的清晨，从煮牛奶到写完一页日历，把生活的节奏调慢一点。</p>
+            <div class="md-day-card-foot">
+              <div class="md-day-author">
+                <span class="md-day-avatar md-day-avatar--a">杳</span>
+                <span class="md-day-author-name">杳杳的清晨</span>
+              </div>
+              <div class="md-day-card-actions">
+                <button class="md-day-act" type="button" data-act="like">♥ <b>826</b></button>
+                <button class="md-day-act" type="button" data-act="save">☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="md-day-card" data-tag="教程干货">
+          <div class="md-day-card-cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="视频封面：电脑时间轴与剪辑软件界面">
+              <rect width="400" height="225" fill="#242a36"/>
+              <rect x="26" y="24" width="348" height="177" rx="10" fill="#303848"/>
+              <rect x="26" y="24" width="348" height="26" rx="10" fill="#3c4658"/>
+              <circle cx="42" cy="37" r="5" fill="#e2703a"/>
+              <circle cx="58" cy="37" r="5" fill="#f0c9a6"/>
+              <circle cx="74" cy="37" r="5" fill="#6ad0b0"/>
+              <rect x="44" y="70" width="80" height="52" rx="6" fill="#4a566b"/>
+              <rect x="132" y="70" width="118" height="52" rx="6" fill="#3c4658"/>
+              <g fill="#6ad0b0">
+                <rect x="44" y="136" width="70" height="12" rx="4"/>
+                <rect x="120" y="136" width="44" height="12" rx="4" opacity=".55"/>
+              </g>
+              <g fill="#e2703a">
+                <rect x="44" y="156" width="50" height="10" rx="4" opacity=".8"/>
+                <rect x="100" y="156" width="92" height="10" rx="4"/>
+                <rect x="198" y="156" width="60" height="10" rx="4" opacity=".6"/>
+              </g>
+              <path d="M44 184 h310" stroke="#6ad0b0" stroke-width="2" opacity=".4" stroke-dasharray="5 5"/>
+            </svg>
+            <span class="md-day-cover-tag">教程干货</span>
+            <span class="md-day-cover-dur">16:08</span>
+          </div>
+          <div class="md-day-card-body">
+            <h3>三个转场思路：让日历式流水素材有叙事感</h3>
+            <p>不用复杂特效，用遮挡、同方向运动和声音衔接，把七天素材串成一条完整的时间线。</p>
+            <div class="md-day-card-foot">
+              <div class="md-day-author">
+                <span class="md-day-avatar md-day-avatar--c">剪</span>
+                <span class="md-day-author-name">剪辑七日谈</span>
+              </div>
+              <div class="md-day-card-actions">
+                <button class="md-day-act" type="button" data-act="like">♥ <b>1,542</b></button>
+                <button class="md-day-act" type="button" data-act="save">☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="md-day-card" data-tag="城市探索">
+          <div class="md-day-card-cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="视频封面：清晨街角的早点摊与蒸汽">
+              <rect width="400" height="225" fill="#3c4a5a"/>
+              <rect x="0" y="0" width="400" height="120" fill="#5d6f80"/>
+              <g fill="#8194a6" opacity=".8">
+                <rect x="18" y="30" width="70" height="100" rx="4"/>
+                <rect x="102" y="52" width="54" height="78" rx="4"/>
+                <rect x="300" y="24" width="82" height="106" rx="4"/>
+              </g>
+              <rect x="0" y="128" width="400" height="97" fill="#2a3038"/>
+              <g transform="translate(180 128)">
+                <rect x="-70" y="0" width="140" height="14" rx="6" fill="#8a5a34"/>
+                <rect x="-82" y="14" width="164" height="62" rx="6" fill="#a5734a"/>
+                <circle cx="-48" cy="44" r="14" fill="#f6c88f"/>
+                <rect x="-20" y="30" width="42" height="30" rx="4" fill="#3a2a1e"/>
+                <path d="M-40 -6 q8 -22 0 -40 M0 -6 q8 -22 0 -40 M38 -6 q8 -22 0 -40" stroke="#e8dccb" stroke-width="6" fill="none" opacity=".55" stroke-linecap="round"/>
+              </g>
+              <circle cx="70" cy="180" r="12" fill="#1c2128"/>
+              <rect x="62" y="190" width="16" height="30" rx="6" fill="#1c2128"/>
+            </svg>
+            <span class="md-day-cover-tag">城市探索</span>
+            <span class="md-day-cover-dur">12:47</span>
+          </div>
+          <div class="md-day-card-body">
+            <h3>凌晨四点的街角：一家早点摊的三十年</h3>
+            <p>跟着摊主老陈走完一个完整的清晨，从和面到收摊，记录城市醒来之前的安静时刻。</p>
+            <div class="md-day-card-foot">
+              <div class="md-day-author">
+                <span class="md-day-avatar md-day-avatar--b">巷</span>
+                <span class="md-day-author-name">巷口观察员</span>
+              </div>
+              <div class="md-day-card-actions">
+                <button class="md-day-act" type="button" data-act="like">♥ <b>2,318</b></button>
+                <button class="md-day-act" type="button" data-act="save">☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="md-day-card" data-tag="美食烹饪">
+          <div class="md-day-card-cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="视频封面：木质餐桌上的家常菜与米饭">
+              <rect width="400" height="225" fill="#e9d8bd"/>
+              <rect x="0" y="0" width="400" height="225" fill="#c9a878" opacity=".35"/>
+              <g stroke="#b89a76" stroke-width="2" opacity=".5">
+                <path d="M0 60 h400"/><path d="M0 120 h400"/><path d="M0 180 h400"/>
+              </g>
+              <ellipse cx="140" cy="130" rx="72" ry="26" fill="#f7efe2"/>
+              <ellipse cx="140" cy="126" rx="58" ry="18" fill="#e2703a" opacity=".85"/>
+              <ellipse cx="278" cy="112" rx="34" ry="30" fill="#fff8ee"/>
+              <path d="M244 112 a34 30 0 0 0 68 0" fill="#f0e4d4"/>
+              <ellipse cx="278" cy="84" rx="34" ry="12" fill="#fbf4ea"/>
+              <g fill="#4f7f6b">
+                <circle cx="122" cy="118" r="7"/>
+                <circle cx="152" cy="128" r="6"/>
+                <circle cx="164" cy="112" r="5"/>
+              </g>
+              <rect x="188" y="148" width="46" height="10" rx="5" fill="#8a5a34"/>
+              <rect x="188" y="164" width="46" height="10" rx="5" fill="#8a5a34"/>
+            </svg>
+            <span class="md-day-cover-tag">美食烹饪</span>
+            <span class="md-day-cover-dur">08:15</span>
+          </div>
+          <div class="md-day-card-body">
+            <h3>一荤两素的三十分钟：工作日便当的稳定方案</h3>
+            <p>把备菜顺序重新排一遍，同样的三十分钟可以多出一份汤，适合长期坚持的厨房流程。</p>
+            <div class="md-day-card-foot">
+              <div class="md-day-author">
+                <span class="md-day-avatar md-day-avatar--d">灶</span>
+                <span class="md-day-author-name">灶台边笔记</span>
+              </div>
+              <div class="md-day-card-actions">
+                <button class="md-day-act" type="button" data-act="like">♥ <b>967</b></button>
+                <button class="md-day-act" type="button" data-act="save">☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="md-day-card" data-tag="兴趣同好">
+          <div class="md-day-card-cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="视频封面：桌面上的胶片相机与冲洗罐">
+              <rect width="400" height="225" fill="#3a3b34"/>
+              <rect x="0" y="150" width="400" height="75" fill="#585440"/>
+              <rect x="60" y="72" width="140" height="82" rx="12" fill="#22231f"/>
+              <circle cx="130" cy="113" r="30" fill="#45463c"/>
+              <circle cx="130" cy="113" r="20" fill="#6b6c58"/>
+              <circle cx="130" cy="113" r="8" fill="#1a1b17"/>
+              <rect x="78" y="60" width="46" height="16" rx="5" fill="#4a4b3f"/>
+              <circle cx="176" cy="88" r="7" fill="#e2703a"/>
+              <g transform="translate(276 108)">
+                <rect x="-34" y="-12" width="68" height="66" rx="12" fill="#8c8a70"/>
+                <rect x="-34" y="-12" width="68" height="20" rx="10" fill="#a5a389"/>
+                <circle cx="0" cy="-2" r="9" fill="#3a3b34"/>
+              </g>
+              <g fill="#f6c88f" opacity=".55">
+                <circle cx="330" cy="60" r="5"/>
+                <circle cx="352" cy="90" r="3"/>
+                <circle cx="36" cy="48" r="4"/>
+              </g>
+            </svg>
+            <span class="md-day-cover-tag">兴趣同好</span>
+            <span class="md-day-cover-dur">14:32</span>
+          </div>
+          <div class="md-day-card-body">
+            <h3>第一卷黑白胶片：从装卷到晾干的完整流程</h3>
+            <p>第一次自己冲洗胶片的全过程，包含药液温度、摇晃节奏与常见失误的补救记录。</p>
+            <div class="md-day-card-foot">
+              <div class="md-day-author">
+                <span class="md-day-avatar md-day-avatar--e">银</span>
+                <span class="md-day-author-name">银盐小站</span>
+              </div>
+              <div class="md-day-card-actions">
+                <button class="md-day-act" type="button" data-act="like">♥ <b>673</b></button>
+                <button class="md-day-act" type="button" data-act="save">☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="md-day-card" data-tag="日常记录">
+          <div class="md-day-card-cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="视频封面：阳台上的绿植与晾晒衣物">
+              <rect width="400" height="225" fill="#cfdcd2"/>
+              <rect x="0" y="170" width="400" height="55" fill="#b7c6b8"/>
+              <rect x="0" y="0" width="400" height="80" fill="#e4ecd9"/>
+              <g>
+                <rect x="40" y="96" width="90" height="74" rx="10" fill="#8a5a34"/>
+                <path d="M85 96 q-26 -40 4 -58 q22 22 6 58" fill="#4f7f6b"/>
+                <path d="M85 96 q30 -34 52 -36 q-2 32 -40 42" fill="#6aa084" opacity=".8"/>
+                <path d="M85 96 q-34 -20 -52 -10 q14 24 44 22" fill="#6aa084" opacity=".6"/>
+              </g>
+              <g>
+                <rect x="160" y="88" width="96" height="82" rx="10" fill="#a5734a"/>
+                <path d="M208 88 q-18 -30 4 -44 q16 18 2 44" fill="#4f7f6b"/>
+                <path d="M208 88 q24 -22 42 -20 q-6 24 -34 30" fill="#6aa084" opacity=".75"/>
+              </g>
+              <g stroke="#8a9a8c" stroke-width="3">
+                <path d="M290 40 v120"/>
+                <path d="M290 52 h80"/>
+              </g>
+              <rect x="300" y="52" width="28" height="44" rx="3" fill="#fff8ee" opacity=".9"/>
+              <rect x="336" y="52" width="24" height="38" rx="3" fill="#e2703a" opacity=".7"/>
+              <circle cx="352" cy="140" r="20" fill="#f6c88f" opacity=".5"/>
+            </svg>
+            <span class="md-day-cover-tag">日常记录</span>
+            <span class="md-day-cover-dur">06:51</span>
+          </div>
+          <div class="md-day-card-body">
+            <h3>把阳台变成小花园：三个月后的第 12 次记录</h3>
+            <p>从两盆枯死的绿萝开始，到如今十二盆轮换的阳台，聊聊哪些植物真的适合新手。</p>
+            <div class="md-day-card-foot">
+              <div class="md-day-author">
+                <span class="md-day-avatar md-day-avatar--b">绿</span>
+                <span class="md-day-author-name">绿得很慢</span>
+              </div>
+              <div class="md-day-card-actions">
+                <button class="md-day-act" type="button" data-act="like">♥ <b>1,104</b></button>
+                <button class="md-day-act" type="button" data-act="save">☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="md-day-card" data-tag="教程干货">
+          <div class="md-day-card-cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="视频封面：手机拍摄稳定器与灯光设置">
+              <rect width="400" height="225" fill="#1f2a2e"/>
+              <rect x="0" y="0" width="400" height="225" fill="#2b3a40" opacity=".7"/>
+              <circle cx="200" cy="112" r="62" fill="#3d5259" opacity=".7"/>
+              <g transform="translate(200 112)">
+                <rect x="-30" y="-52" width="60" height="104" rx="12" fill="#12191c"/>
+                <rect x="-23" y="-44" width="46" height="80" rx="8" fill="#5a7f88"/>
+                <circle cx="0" cy="46" r="6" fill="#e2703a"/>
+                <rect x="-14" y="-70" width="28" height="14" rx="5" fill="#3c4a50"/>
+              </g>
+              <g stroke="#6ad0b0" stroke-width="2" opacity=".6">
+                <path d="M76 190 L324 190"/>
+                <path d="M76 184 v12"/>
+                <path d="M324 184 v12"/>
+              </g>
+              <text x="200" y="212" font-family="sans-serif" font-size="11" fill="#8fb7ae" text-anchor="middle" letter-spacing="2">SETUP 01</text>
+              <circle cx="330" cy="52" r="26" fill="#f0c9a6" opacity=".2"/>
+              <circle cx="62" cy="168" r="18" fill="#e2703a" opacity=".25"/>
+            </svg>
+            <span class="md-day-cover-tag">教程干货</span>
+            <span class="md-day-cover-dur">11:20</span>
+          </div>
+          <div class="md-day-card-body">
+            <h3>手机也能拍出稳定画面：五个不买单反的取景习惯</h3>
+            <p>从呼吸节奏到支撑点选择，都是拍摄日历式长镜头时会立刻用得上的小调整。</p>
+            <div class="md-day-card-foot">
+              <div class="md-day-author">
+                <span class="md-day-avatar md-day-avatar--c">镜</span>
+                <span class="md-day-author-name">镜像实验室</span>
+              </div>
+              <div class="md-day-card-actions">
+                <button class="md-day-act" type="button" data-act="like">♥ <b>1,877</b></button>
+                <button class="md-day-act" type="button" data-act="save">☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="md-day-card" data-tag="城市探索">
+          <div class="md-day-card-cover">
+            <svg viewBox="0 0 400 225" role="img" aria-label="视频封面：老城区巷子与远处的屋顶">
+              <rect width="400" height="225" fill="#dcd0bd"/>
+              <rect x="0" y="0" width="400" height="120" fill="#c2b49c"/>
+              <g fill="#8f7d64">
+                <rect x="0" y="70" width="86" height="120"/>
+                <rect x="96" y="40" width="70" height="150"/>
+                <rect x="300" y="56" width="100" height="134"/>
+              </g>
+              <g fill="#5f5344">
+                <path d="M0 70 L43 30 L86 70 Z"/>
+                <path d="M96 40 L131 8 L166 40 Z"/>
+                <path d="M300 56 L350 20 L400 56 Z"/>
+              </g>
+              <rect x="166" y="120" width="134" height="70" fill="#b0a089"/>
+              <rect x="166" y="112" width="134" height="10" fill="#8f7d64"/>
+              <path d="M0 190 h400 v35 h-400 z" fill="#a89880"/>
+              <g fill="#efe3d1" opacity=".75">
+                <rect x="206" y="140" width="18" height="26" rx="3"/>
+                <rect x="240" y="140" width="18" height="26" rx="3"/>
+              </g>
+              <circle cx="64" cy="116" r="16" fill="#e2703a" opacity=".65"/>
+            </svg>
+            <span class="md-day-cover-tag">城市探索</span>
+            <span class="md-day-cover-dur">18:05</span>
+          </div>
+          <div class="md-day-card-body">
+            <h3>一条巷子的一百年：从旧屋地图开始走一遍</h3>
+            <p>对照不同年代的老地图，在同一个街区里找出消失的水井、门牌与被改造的屋顶。</p>
+            <div class="md-day-card-foot">
+              <div class="md-day-author">
+                <span class="md-day-avatar md-day-avatar--b">巷</span>
+                <span class="md-day-author-name">巷口观察员</span>
+              </div>
+              <div class="md-day-card-actions">
+                <button class="md-day-act" type="button" data-act="like">♥ <b>1,436</b></button>
+                <button class="md-day-act" type="button" data-act="save">☆ 收藏</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 专题企划 -->
+  <section class="md-day-section" id="mdDayTopics">
+    <div class="md-day-wrap">
+      <div class="md-day-section-head">
+        <div class="md-day-section-title">
+          <h2>专题企划</h2>
+          <p>以日历为单位的系列内容，围绕同一条时间线持续更新。</p>
+        </div>
+        <a class="md-day-section-more" href="#mdDayNews">专题动态</a>
+      </div>
+      <div class="md-day-topics">
+        <article class="md-day-topic">
+          <svg viewBox="0 0 320 170" role="img" aria-label="专题封面：冬日手账摊开的页面">
+            <rect width="320" height="170" fill="#efe3d1"/>
+            <rect x="34" y="28" width="112" height="114" rx="6" fill="#fff8ee" transform="rotate(-4 90 85)"/>
+            <rect x="174" y="28" width="112" height="114" rx="6" fill="#fbf4ea" transform="rotate(4 230 85)"/>
+            <g stroke="#c9b8a4" stroke-width="2" opacity=".7">
+              <path d="M52 58 h76"/><path d="M52 76 h76"/><path d="M52 94 h60"/><path d="M52 112 h72"/>
+              <path d="M192 58 h76"/><path d="M192 76 h60"/><path d="M192 94 h76"/><path d="M192 112 h48"/>
+            </g>
+            <circle cx="150" cy="140" r="10" fill="#e2703a"/>
+            <path d="M150 140 l40 -30" stroke="#b7481f" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <div class="md-day-topic-body">
+            <h3>冬日手账周</h3>
+            <p>十二位创作者连续七天记录手账与日常，从排版到情绪，把冬天写进页脚。</p>
+            <span class="md-day-topic-status">更新中 · 第 4 期</span>
+          </div>
+        </article>
+        <article class="md-day-topic">
+          <svg viewBox="0 0 320 170" role="img" aria-label="专题封面：城市夜灯下的街景长曝光">
+            <rect width="320" height="170" fill="#232838"/>
+            <rect x="0" y="0" width="320" height="100" fill="#2f3a52"/>
+            <g fill="#f6c88f">
+              <circle cx="52" cy="34" r="3"/><circle cx="120" cy="24" r="2"/><circle cx="210" cy="44" r="3"/>
+              <circle cx="270" cy="28" r="2"/><circle cx="88" cy="66" r="2"/>
+            </g>
+            <g fill="#3c4658">
+              <rect x="10" y="80" width="60" height="90"/>
+              <rect x="88" y="60" width="52" height="110"/>
+              <rect x="222" y="72" width="72" height="98"/>
+            </g>
+            <path d="M50 150 L272 150" stroke="#e2703a" stroke-width="3" opacity=".8"/>
+            <path d="M60 162 L280 162" stroke="#6ad0b0" stroke-width="2" opacity=".6"/>
+            <circle cx="160" cy="128" r="14" fill="#e2703a" opacity=".6"/>
+          </svg>
+          <div class="md-day-topic-body">
+            <h3>夜行日历：城市二十四个小时</h3>
+            <p>同一条街道在不同时段的影像对照，找出属于夜晚的那部分城市性格。</p>
+            <span class="md-day-topic-status">更新中 · 第 9 期</span>
+          </div>
+        </article>
+        <article class="md-day-topic">
+          <svg viewBox="0 0 320 170" role="img" aria-label="专题封面：剪辑工作台与分镜草稿">
+            <rect width="320" height="170" fill="#2b2f3c"/>
+            <rect x="24" y="24" width="272" height="122" rx="10" fill="#343a4a"/>
+            <rect x="24" y="24" width="272" height="20" rx="10" fill="#414a5e"/>
+            <g fill="#e2703a">
+              <rect x="40" y="62" width="56" height="34" rx="5"/>
+              <rect x="104" y="62" width="42" height="34" rx="5" opacity=".6"/>
+              <rect x="154" y="62" width="64" height="34" rx="5"/>
+            </g>
+            <g fill="#6ad0b0" opacity=".75">
+              <rect x="40" y="108" width="44" height="10" rx="4"/>
+              <rect x="92" y="108" width="72" height="10" rx="4"/>
+              <rect x="172" y="108" width="52" height="10" rx="4"/>
+              <rect x="232" y="108" width="48" height="10" rx="4" opacity=".5"/>
+            </g>
+            <path d="M236 62 l24 0 l-10 34 z" fill="#f0c9a6" opacity=".85"/>
+          </svg>
+          <div class="md-day-topic-body">
+            <h3>剪辑七日谈</h3>
+            <p>每周一个剪辑切面，从节奏、声音到色彩，把技术拆成能马上用的动作。</p>
+            <span class="md-day-topic-status">更新中 · 第 5 期</span>
+          </div>
+        </article>
+        <article class="md-day-topic">
+          <svg viewBox="0 0 320 170" role="img" aria-label="专题封面：社区投稿墙与彩色便签">
+            <rect width="320" height="170" fill="#f2e6d5"/>
+            <rect x="0" y="0" width="320" height="170" fill="#e7d4bb" opacity=".5"/>
+            <g>
+              <rect x="28" y="30" width="66" height="50" rx="5" fill="#e2703a" opacity=".85" transform="rotate(-5 61 55)"/>
+              <rect x="110" y="24" width="66" height="50" rx="5" fill="#6aa084" opacity=".85" transform="rotate(3 143 49)"/>
+              <rect x="192" y="34" width="66" height="50" rx="5" fill="#c98a2a" opacity=".85" transform="rotate(-3 225 59)"/>
+              <rect x="66" y="94" width="66" height="50" rx="5" fill="#7a6bb8" opacity=".8" transform="rotate(4 99 119)"/>
+              <rect x="156" y="96" width="66" height="50" rx="5" fill="#b8567e" opacity=".8" transform="rotate(-4 189 121)"/>
+            </g>
+          </svg>
+          <div class="md-day-topic-body">
+            <h3>我的这一格：社区投稿企划</h3>
+            <p>开放式投稿，任何一天都可以成为入口，编辑部每周挑选十格放入官方日历。</p>
+            <span class="md-day-topic-status">进行中 · 报名开放</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 创作者矩阵 -->
+  <section class="md-day-section md-day-section--alt" id="mdDayCreators">
+    <div class="md-day-wrap">
+      <div class="md-day-section-head">
+        <div class="md-day-section-title">
+          <h2>创作者矩阵</h2>
+          <p>持续更新日历条目的长期创作者，他们构成了内容生态的骨架。</p>
+        </div>
+        <a class="md-day-section-more" href="#mdDayContact">申请入驻</a>
+      </div>
+      <div class="md-day-creators">
+        <article class="md-day-creator">
+          <div class="md-day-creator-avatar md-day-avatar--a">杳</div>
+          <div class="md-day-creator-info">
+            <h3>杳杳的清晨</h3>
+            <div class="md-day-creator-field">日常记录 · 生活节奏</div>
+            <p>专注清晨时段的影像记录，擅长用固定机位呈现一天开始前最安静的二十分钟。</p>
+            <div class="md-day-creator-data"><span>作品 <b>186</b></span><span>关注 <b>4.2 万</b></span></div>
+          </div>
+        </article>
+        <article class="md-day-creator">
+          <div class="md-day-creator-avatar md-day-avatar--c">剪</div>
+          <div class="md-day-creator-info">
+            <h3>剪辑七日谈</h3>
+            <div class="md-day-creator-field">教程干货 · 后期制作</div>
+            <p>以周为单位拆解剪辑技法，讲解克制、步骤清晰，被不少新手当作入门的第一套课。</p>
+            <div class="md-day-creator-data"><span>作品 <b>94</b></span><span>关注 <b>6.8 万</b></span></div>
+          </div>
+        </article>
+        <article class="md-day-creator">
+          <div class="md-day-creator-avatar md-day-avatar--b">巷</div>
+          <div class="md-day-creator-info">
+            <h3>巷口观察员</h3>
+            <div class="md-day-creator-field">城市探索 · 在地文化</div>
+            <p>长期蹲守老街区，用影像档案的方式记录正在改变的城市细节与人情往来。</p>
+            <div class="md-day-creator-data"><span>作品 <b>212</b></span><span>关注 <b>5.6 万</b></span></div>
+          </div>
+        </article>
+        <article class="md-day-creator">
+          <div class="md-day-creator-avatar md-day-avatar--d">灶</div>
+          <div class="md-day-creator-info">
+            <h3>灶台边笔记</h3>
+            <div class="md-day-creator-field">美食烹饪 · 家常流程</div>
+            <p>不追求摆盘，专注可复制的工作日厨房方案，把每道菜的备料顺序讲清楚。</p>
+            <div class="md-day-creator-data"><span>作品 <b>148</b></span><span>关注 <b>3.9 万</b></span></div>
+          </div>
+        </article>
+        <article class="md-day-creator">
+          <div class="md-day-creator-avatar md-day-avatar--e">银</div>
+          <div class="md-day-creator-info">
+            <h3>银盐小站</h3>
+            <div class="md-day-creator-field">兴趣同好 · 胶片摄影</div>
+            <p>围绕胶片冲洗与扫描建立分享体系，欢迎所有刚装错第一卷的新人提问。</p>
+            <div class="md-day-creator-data"><span>作品 <b>76</b></span><span>关注 <b>2.4 万</b></span></div>
+          </div>
+        </article>
+        <article class="md-day-creator">
+          <div class="md-day-creator-avatar md-day-avatar--b">绿</div>
+          <div class="md-day-creator-info">
+            <h3>绿得很慢</h3>
+            <div class="md-day-creator-field">日常记录 · 阳台种植</div>
+            <p>用三个月为单位记录阳台植物的变化，强调耐心与失败经验的完整保留。</p>
+            <div class="md-day-creator-data"><span>作品 <b>63</b></span><span>关注 <b>1.8 万</b></span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 品牌解析 -->
+  <section class="md-day-section" id="mdDayAbout">
+    <div class="md-day-wrap">
+      <div class="md-day-about">
+        <h2>关于麻豆日历表：用日期组织影像的品牌解析</h2>
+        <p>
+          <strong>麻豆日历表</strong>是一家以日历为核心结构的视频品牌官网。我们相信，绝大多数真实、有价值的内容并不是以“爆款”的形态出现的，它们更像日历上的一个个格子：有具体的时间、有清晰的上下文、有可以被反复查阅的位置。基于这个判断，我们把平台的内容组织方式从“推荐流”迁移到“日期轴”，让每一条视频都能被固定在某个具体的日子里，并在这个位置上持续积累它的价值。这是麻豆日历表作为一家视频企业最基础的产品哲学，也是我们在内容生态中坚持的差异化方向。
+        </p>
+        <p>
+          作为深耕影像记录垂直领域的品牌，麻豆日历表同时服务于两类人群：一类是持续创作的创作者，另一类是希望系统化观看内容的用户。对创作者，我们提供条目化管理工具、专题企划入口与相对透明的数据反馈，让更新不再依赖情绪，而是形成可持续的节奏；对用户，我们提供按日期、按标签、按专题三种检索路径，配合编辑部的焦点推荐，让浏览既有效率，也有发现的乐趣。平台当前持续运营的专题共 27 个，覆盖日常记录、教程干货、城市探索、美食烹饪、兴趣同好等方向，这些专题构成了品牌内容生态的支柱。
+        </p>
+        <p>
+          在品质控制上，麻豆日历表采用“官方发布 + 创作者共建”的双轨机制。官方发布的内容由编辑部统一策划、审核与编排，强调真实、克制与信息密度；创作者共建的内容则通过投稿通道进入，经过基础规范校验后进入日历条目池，再由社区数据与编辑推荐共同决定其展示位置。我们并不追求内容数量的无限扩张，而是希望在可管理的规模内维持口碑，让每一条进入日历的内容都对得起它所占用的那一格。这种克制，是麻豆日历表作为行业领先影像日程社区的基本自觉。
+        </p>
+        <p>
+          品牌故事的另一面是陪伴。日历是线性的，但人的记忆不是。很多用户告诉我们，他们在麻豆日历表里重新找到了两三年前某个普通日子的影像，那种感觉像翻到一本旧手账。这正是我们坚持“日期优先”的原因：热点会过去，标签会变化，但日期永远稳定。我们希望这个平台能够长期陪伴创作者与用户，成为一个可以被信赖的影像档案库。持续的更新、稳定的结构、清晰的规则，是我们对“用户至上”这四个字最朴素的实践。
+        </p>
+        <div class="md-day-about-cols">
+          <div class="md-day-about-card">
+            <h3>我们坚持的三件事</h3>
+            <p>一是日期结构的稳定性，不因流量逻辑随意改动；二是原创与正版优先，所有条目均要求来源清晰；三是克制推荐，把选择权交还给用户的检索习惯。</p>
+          </div>
+          <div class="md-day-about-card">
+            <h3>我们正在做的事</h3>
+            <p>完善创作者成长体系、扩充专题企划的更新频率、优化移动端的日历浏览体验，并持续举办社区投稿与影像挑战活动，让更多人参与内容生态建设。</p>
+          </div>
+          <div class="md-day-about-card">
+            <h3>关于关键词「麻豆日历表」</h3>
+            <p>在我们的语境里，麻豆日历表既是一个产品名称，也是一种内容方法论：以日为格、以格为片、以片成史。它强调秩序感，也强调生活感。</p>
+          </div>
+          <div class="md-day-about-card">
+            <h3>社会责任与开放合作</h3>
+            <p>我们为公益影像项目提供免费的条目展示位，并与多家文化机构合作开展城市影像档案计划，让影像记录承担起更长周期的社会价值。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 影像墙 -->
+  <section class="md-day-section md-day-section--alt" id="mdDayWall">
+    <div class="md-day-wrap">
+      <div class="md-day-section-head">
+        <div class="md-day-section-title">
+          <h2>影像墙</h2>
+          <p>来自社区投稿的日历截图，每一张都是某一天的真实切片。</p>
+        </div>
+        <a class="md-day-section-more" href="#mdDayContact">上传我的作品</a>
+      </div>
+      <div class="md-day-wall">
+        <div class="md-day-wall-item md-day-wall-item--big">
+          <svg viewBox="0 0 420 300" role="img" aria-label="影像墙大图：冬日黄昏时分的屋顶与烟囱">
+            <rect width="420" height="300" fill="#d9b48c"/>
+            <rect x="0" y="0" width="420" height="160" fill="#c98a5a"/>
+            <circle cx="330" cy="72" r="40" fill="#f6c88f" opacity=".9"/>
+            <path d="M0 160 L420 140 L420 300 L0 300 Z" fill="#8a5a34"/>
+            <g fill="#5f3d22">
+              <path d="M40 160 L120 106 L200 160 Z"/>
+              <rect x="60" y="160" width="120" height="80"/>
+              <path d="M210 150 L280 106 L350 150 Z"/>
+              <rect x="228" y="150" width="104" height="72"/>
+            </g>
+            <rect x="286" y="96" width="14" height="34" fill="#3a2616"/>
+            <path d="M293 96 q-12 -24 2 -34 q12 18 4 34" fill="#eee0cb" opacity=".7"/>
+            <g fill="#f6c88f" opacity=".85">
+              <rect x="86" y="180" width="20" height="26" rx="3"/>
+              <rect x="126" y="180" width="20" height="26" rx="3"/>
+              <rect x="252" y="172" width="18" height="24" rx="3"/>
+            </g>
+            <path d="M0 262 h420 v38 h-420 z" fill="#3a2616" opacity=".4"/>
+          </svg>
+          <span class="md-day-wall-cap">11 月 12 日 · 屋顶上的黄昏</span>
+        </div>
+        <div class="md-day-wall-item">
+          <svg viewBox="0 0 200 130" role="img" aria-label="影像墙小图：桌面上的手写日历与钢笔">
+            <rect width="200" height="130" fill="#f1e6d5"/>
+            <rect x="30" y="18" width="140" height="96" rx="6" fill="#fff8ee" transform="rotate(-2 100 66)"/>
+            <g stroke="#c9b8a4" stroke-width="2">
+              <path d="M48 44 h104"/><path d="M48 64 h104"/><path d="M48 84 h72"/>
+            </g>
+            <rect x="52" y="34" width="26" height="6" rx="3" fill="#e2703a"/>
+            <path d="M150 96 l26 -20" stroke="#b7481f" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <span class="md-day-wall-cap">11 月 9 日 · 写满一页</span>
+        </div>
+        <div class="md-day-wall-item">
+          <svg viewBox="0 0 200 130" role="img" aria-label="影像墙小图：雨天车窗上的水珠与街灯">
+            <rect width="200" height="130" fill="#3d4a58"/>
+            <rect x="0" y="0" width="200" height="130" fill="#4f6172" opacity=".7"/>
+            <circle cx="150" cy="42" r="20" fill="#f6c88f" opacity=".75"/>
+            <g fill="#cfdbe4" opacity=".6">
+              <circle cx="46" cy="46" r="5"/><circle cx="76" cy="70" r="4"/><circle cx="112" cy="38" r="6"/>
+              <circle cx="60" cy="98" r="4"/><circle cx="140" cy="92" r="5"/><circle cx="176" cy="74" r="3"/>
+            </g>
+            <path d="M0 112 h200" stroke="#e2703a" stroke-width="3" opacity=".6"/>
+          </svg>
+          <span class="md-day-wall-cap">11 月 6 日 · 雨夜车灯</span>
+        </div>
+        <div class="md-day-wall-item">
+          <svg viewBox="0 0 200 130" role="img" aria-label="影像墙小图：桌上的陶杯与窗影">
+            <rect width="200" height="130" fill="#e5d9c6"/>
+            <rect x="0" y="86" width="200" height="44" fill="#c9a878"/>
+            <g transform="translate(96 58)">
+              <path d="M-30 -10 h52 l-6 36 h-40 z" fill="#8a5a34"/>
+              <path d="M22 0 q16 6 0 20" fill="none" stroke="#8a5a34" stroke-width="6"/>
+              <ellipse cx="-4" cy="-10" rx="26" ry="7" fill="#5f3d22"/>
+            </g>
+            <rect x="130" y="20" width="52" height="66" rx="4" fill="#f6c88f" opacity=".45" transform="rotate(8 156 53)"/>
+          </svg>
+          <span class="md-day-wall-cap">11 月 3 日 · 一杯热茶</span>
+        </div>
+        <div class="md-day-wall-item">
+          <svg viewBox="0 0 200 130" role="img" aria-label="影像墙小图：公园长椅与落叶">
+            <rect width="200" height="130" fill="#cfd6c3"/>
+            <rect x="0" y="94" width="200" height="36" fill="#a8b596"/>
+            <g transform="translate(100 74)">
+              <rect x="-52" y="0" width="104" height="12" rx="4" fill="#8a5a34"/>
+              <rect x="-52" y="18" width="104" height="10" rx="4" fill="#a5734a"/>
+              <rect x="-46" y="28" width="8" height="26" fill="#5f3d22"/>
+              <rect x="38" y="28" width="8" height="26" fill="#5f3d22"/>
+            </g>
+            <g fill="#c98a2a" opacity=".85">
+              <ellipse cx="46" cy="106" rx="8" ry="4" transform="rotate(-20 46 106)"/>
+              <ellipse cx="152" cy="112" rx="7" ry="4" transform="rotate(26 152 112)"/>
+              <ellipse cx="132" cy="96" rx="6" ry="3" transform="rotate(10 132 96)"/>
+            </g>
+          </svg>
+          <span class="md-day-wall-cap">10 月 29 日 · 长椅午后</span>
+        </div>
+        <div class="md-day-wall-item">
+          <svg viewBox="0 0 200 130" role="img" aria-label="影像墙小图：夜晚书桌台灯与笔记">
+            <rect width="200" height="130" fill="#2a2f38"/>
+            <rect x="0" y="96" width="200" height="34" fill="#3c4450"/>
+            <g transform="translate(92 92)">
+              <path d="M-26 0 L0 -52 L26 0" fill="#f0c9a6" opacity=".85"/>
+              <rect x="-3" y="-52" width="6" height="66" fill="#8a8f98"/>
+              <ellipse cx="0" cy="2" rx="20" ry="5" fill="#f6c88f" opacity=".5"/>
+            </g>
+            <rect x="120" y="76" width="52" height="28" rx="4" fill="#5a6270" transform="rotate(-6 146 90)"/>
+          </svg>
+          <span class="md-day-wall-cap">10 月 24 日 · 夜读台灯</span>
+        </div>
+        <div class="md-day-wall-item">
+          <svg viewBox="0 0 200 130" role="img" aria-label="影像墙小图：清晨的山脊线与薄雾">
+            <rect width="200" height="130" fill="#dce6ea"/>
+            <path d="M0 96 L58 44 L104 82 L150 36 L200 84 L200 130 L0 130 Z" fill="#93a8ae"/>
+            <path d="M0 110 L48 74 L92 104 L146 66 L200 104 L200 130 L0 130 Z" fill="#6d848c"/>
+            <path d="M0 76 h200" stroke="#fbf4ea" stroke-width="8" opacity=".55"/>
+            <circle cx="164" cy="30" r="16" fill="#f6c88f" opacity=".9"/>
+          </svg>
+          <span class="md-day-wall-cap">10 月 20 日 · 山脊薄雾</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 用户评价 -->
+  <section class="md-day-section" id="mdDayReviews">
+    <div class="md-day-wrap">
+      <div class="md-day-section-head">
+        <div class="md-day-section-title">
+          <h2>用户评价</h2>
+          <p>来自创作者与长期用户的真实反馈，语气各不相同，我们原样保留。</p>
+        </div>
+      </div>
+      <div class="md-day-reviews">
+        <div class="md-day-review">
+          <div class="md-day-review-head">
+            <span class="md-day-avatar md-day-avatar--a">周</span>
+            <div><div class="md-day-review-name">周小满</div><div class="md-day-review-date">2026-11-15</div></div>
+          </div>
+          <div class="md-day-stars">★★★★★</div>
+          <p>用日历排内容这个思路太适合我这种更新不稳定的人了。哪怕隔了半个月，也能接回原来那条线，不会有断掉的感觉。</p>
+        </div>
+        <div class="md-day-review">
+          <div class="md-day-review-head">
+            <span class="md-day-avatar md-day-avatar--b">吴</span>
+            <div><div class="md-day-review-name">吴岸</div><div class="md-day-review-date">2026-11-12</div></div>
+          </div>
+          <div class="md-day-stars">★★★★☆</div>
+          <p>剪辑七日谈几乎每期都看，讲得比很多付费课清楚。唯一希望是能按难度再分个类，找起来更方便。</p>
+        </div>
+        <div class="md-day-review">
+          <div class="md-day-review-head">
+            <span class="md-day-avatar md-day-avatar--c">林</span>
+            <div><div class="md-day-review-name">林间有风</div><div class="md-day-review-date">2026-11-09</div></div>
+          </div>
+          <div class="md-day-stars">★★★★★</div>
+          <p>我是从专题进来的，顺着「夜行日历」把一条街不同时段都看了一遍，这种对照感在别的地方真找不到。</p>
+        </div>
+        <div class="md-day-review">
+          <div class="md-day-review-head">
+            <span class="md-day-avatar md-day-avatar--d">陈</span>
+            <div><div class="md-day-review-name">陈师傅的厨房</div><div class="md-day-review-date">2026-11-06</div></div>
+          </div>
+          <div class="md-day-stars">★★★★☆</div>
+          <p>投稿流程写得挺明白，审核也给了具体意见，不是一句不通过就完事。能感受到平台是真的在维护内容质量。</p>
+        </div>
+        <div class="md-day-review">
+          <div class="md-day-review-head">
+            <span class="md-day-avatar md-day-avatar--e">叶</span>
+            <div><div class="md-day-review-name">叶知秋</div><div class="md-day-review-date">2026-11-02</div></div>
+          </div>
+          <div class="md-day-stars">★★★★★</div>
+          <p>收藏夹终于不会越堆越乱了，按日期一列，想找哪天就找哪天。希望以后能加个导出，做个人年度回顾。</p>
+        </div>
+        <div class="md-day-review">
+          <div class="md-day-review-head">
+            <span class="md-day-avatar md-day-avatar--a">顾</span>
+            <div><div class="md-day-review-name">顾以南</div><div class="md-day-review-date">2026-10-28</div></div>
+          </div>
+          <div class="md-day-stars">★★★★☆</div>
+          <p>移动端体验还不错，坐地铁的时候刷两格刚好。就是有些长视频加载有点慢，希望再优化下。</p>
+        </div>
+        <div class="md-day-review">
+          <div class="md-day-review-head">
+            <span class="md-day-avatar md-day-avatar--b">许</span>
+            <div><div class="md-day-review-name">许一川</div><div class="md-day-review-date">2026-10-24</div></div>
+          </div>
+          <div class="md-day-stars">★★★★★</div>
+          <p>作为机构账号，我们在这里做城市影像档案的发布，条目的时间结构帮了大忙，整理史料相当高效。</p>
+        </div>
+        <div class="md-day-review">
+          <div class="md-day-review-head">
+            <span class="md-day-avatar md-day-avatar--c">苏</span>
+            <div><div class="md-day-review-name">苏木</div><div class="md-day-review-date">2026-10-20</div></div>
+          </div>
+          <div class="md-day-stars">★★★★★</div>
+          <p>氛围很安静，没有那种逼着你一直刷的压迫感。社区投稿企划也很有意思，我也投了一格试试。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 动态与FAQ -->
+  <section class="md-day-section md-day-section--alt" id="mdDayNews">
+    <div class="md-day-wrap">
+      <div class="md-day-section-head">
+        <div class="md-day-section-title">
+          <h2>企业动态与帮助</h2>
+          <p>官方发布的最新条目、产品更新与常见问题说明。</p>
+        </div>
+      </div>
+      <div class="md-day-split">
+        <div>
+          <div class="md-day-news-list">
+            <article class="md-day-news">
+              <div class="md-day-news-date">11 月<br><b>19</b></div>
+              <div>
+                <h3>「冬日手账周」专题第 4 期上线</h3>
+                <p>本周新增 12 条影像条目，覆盖手账排版、纸张选择与日常记录方法。</p>
+              </div>
+            </article>
+            <article class="md-day-news">
+              <div class="md-day-news-date">11 月<br><b>15</b></div>
+              <div>
+                <h3>剪辑七日谈第 5 期发布，投稿通道同步开启</h3>
+                <p>本期主题为「声音先行」，面向所有创作者征集 3 分钟以内的叙事片段。</p>
+              </div>
+            </article>
+            <article class="md-day-news">
+              <div class="md-day-news-date">11 月<br><b>08</b></div>
+              <div>
+                <h3>日历浏览器移动端体验优化</h3>
+                <p>新增标签筛选记忆与滑动返回，条目加载速度平均提升约 30%。</p>
+              </div>
+            </article>
+            <article class="md-day-news">
+              <div class="md-day-news-date">10 月<br><b>30</b></div>
+              <div>
+                <h3>社区影像挑战「我的这一格」开放报名</h3>
+                <p>投稿周期两个月，编辑部每周挑选十格进入官方日历，并给予展示位推荐。</p>
+              </div>
+            </article>
+            <article class="md-day-news">
+              <div class="md-day-news-date">10 月<br><b>22</b></div>
+              <div>
+                <h3>与三家城市文化机构达成影像档案合作</h3>
+                <p>合作内容将围绕老街区记录、口述影像与公共展览展开，欢迎机构联系洽谈。</p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="md-day-faq">
+          <details open>
+            <summary>麻豆日历表和普通视频平台有什么不同？</summary>
+            <p>我们把内容组织的主轴从推荐流改为日期结构。每条内容都归属于某个具体日期，用户可以按日、按专题、按标签检索，创作者也能围绕时间线持续积累，而不是被单条内容的热度左右。</p>
+          </details>
+          <details>
+            <summary>如何成为平台创作者并发布日历条目？</summary>
+            <p>在页脚或首屏入口提交入驻申请，填写创作方向与代表作品；通过基础审核后即可获得条目发布权限。平台会提供条目管理的操作说明与规范文档。</p>
+          </details>
+          <details>
+            <summary>投稿的内容需要满足什么要求？</summary>
+            <p>要求为原创或已获授权的正版内容，画面清晰、音画同步，且具备明确的记录属性。涉及他人肖像与场地的内容需自行取得许可，平台会进行基础规范校验。</p>
+          </details>
+          <details>
+            <summary>日历条目可以修改或调整日期吗？</summary>
+            <p>条目发布后可在管理后台修改标题、简介与标签；日期作为结构信息原则上不支持更改，特殊情况可通过联系编辑部说明原因申请处理。</p>
+          </details>
+          <details>
+            <summary>平台是否支持机构或品牌合作？</summary>
+            <p>支持。我们与城市文化机构、品牌方与内容工作室均有合作形式，包括专题共建、影像档案计划与定制企划。可发送需求说明至合作邮箱，我们会在三个工作日内回复。</p>
+          </details>
+          <details>
+            <summary>内容推荐会参考哪些因素？</summary>
+            <p>主要由编辑推荐、专题适配度与社区反馈三部分构成。我们刻意降低单一热度指标的权重，避免短期数据对长期内容生态造成挤压。</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 合作伙伴 -->
+  <section class="md-day-section" id="mdDayPartners">
+    <div class="md-day-wrap">
+      <div class="md-day-section-head">
+        <div class="md-day-section-title">
+          <h2>合作品牌与伙伴</h2>
+          <p>共同参与影像记录与内容生态建设的长期合作伙伴。</p>
+        </div>
+      </div>
+      <div class="md-day-partners">
+        <div class="md-day-partner"><b>拾光影像</b><span>影像器材支持</span></div>
+        <div class="md-day-partner"><b>南山书房</b><span>文化空间共建</span></div>
+        <div class="md-day-partner"><b>街巷档案</b><span>城市影像计划</span></div>
+        <div class="md-day-partner"><b>麦田工作室</b><span>后期制作协作</span></div>
+        <div class="md-day-partner"><b>慢岛咖啡</b><span>线下活动场地</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系投稿 -->
+  <section class="md-day-section" id="mdDayContact">
+    <div class="md-day-wrap">
+      <div class="md-day-cta">
+        <h2>把你的那一格交给麻豆日历表</h2>
+        <p>无论是一段十分钟的城市记录，还是三十秒的清晨片段，只要它真实、清晰、有细节，就值得被放进日历。我们在持续运营的内容生态里，为创作者保留位置。</p>
+        <div class="md-day-cta-actions">
+          <button class="md-day-btn md-day-btn--solid" type="button" id="mdDaySubmitBtn">提交投稿</button>
+          <button class="md-day-btn md-day-btn--ghost" type="button" id="mdDayShareBtn">分享页面</button>
+          <button class="md-day-btn md-day-btn--ghost" type="button" id="mdDayReportBtn">反馈建议</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 页脚 -->
+<footer class="md-day-footer">
+  <div class="md-day-wrap">
+    <div class="md-day-footer-grid">
+      <div>
+        <div class="md-day-footer-brand">
+          <span class="md-day-brand-mark">麻</span>
+          <b>麻豆日历表</b>
+        </div>
+        <p>麻豆日历表官方网站 · 以日期为结构的影像日程社区。我们为创作者与企业搭建高品质内容生态，坚持原创正版、持续运营与用户至上。</p>
+        <p style="margin-top:10px">联系邮箱：hello@matriccalendar.example<br>合作邮箱：partner@matriccalendar.example<br>工作时间：周一至周五 10:00–19:00</p>
+      </div>
+      <div>
+        <h3>内容导航</h3>
+        <ul>
+          <li><a href="#mdDayFocus">焦点影像</a></li>
+          <li><a href="#mdDayFeed">日历视频流</a></li>
+          <li><a href="#mdDayTopics">专题企划</a></li>
+          <li><a href="#mdDayWall">社区影像墙</a></li>
+          <li><a href="#mdDayReviews">用户评价</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>关于平台</h3>
+        <ul>
+          <li><a href="#mdDayAbout">品牌故事</a></li>
+          <li><a href="#mdDayCreators">创作者矩阵</a></li>
+          <li><a href="#mdDayNews">企业动态</a></li>
+          <li><a href="#mdDayPartners">合作品牌</a></li>
+          <li><a href="#mdDayContact">联系与投稿</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>帮助与规范</h3>
+        <ul>
+          <li><a href="#mdDayNews">常见问题</a></li>
+          <li><a href="#mdDayContact">投稿指南</a></li>
+          <li><a href="#mdDayContact">版权说明</a></li>
+          <li><a href="#mdDayContact">隐私说明</a></li>
+          <li><a href="#mdDayContact">意见反馈</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="md-day-footer-bottom">
+      <span>© 2024–2026 麻豆日历表 版权所有 · 持续运营中</span>
+      <span>官方网站 · 内容版权归原作者所有 · 未经授权请勿转载</span>
+    </div>
+  </div>
+</footer>
+
+<button class="md-day-totop" id="mdDayToTop" type="button" aria-label="回到顶部">↑</button>
+<div class="md-day-toast" id="mdDayToast" role="status" aria-live="polite"></div>
+
+<!-- 投稿弹窗 -->
+<div class="md-day-modal" id="mdDaySubmitModal" aria-hidden="true">
+  <div class="md-day-modal-box" role="dialog" aria-modal="true" aria-label="投稿表单">
+    <button class="md-day-modal-close" type="button" data-close="mdDaySubmitModal" aria-label="关闭">×</button>
+    <h3>提交你的日历条目</h3>
+    <p class="md-day-modal-sub">填写基本信息，编辑部会在三个工作日内回复。</p>
+    <form id="mdDaySubmitForm">
+      <div class="md-day-field">
+        <label for="mdDaySubmitName">创作者昵称</label>
+        <input id="mdDaySubmitName" type="text" placeholder="例如：杳杳的清晨" required>
+      </div>
+      <div class="md-day-field">
+        <label for="mdDaySubmitTitle">条目名称</label>
+        <input id="mdDaySubmitTitle" type="text" placeholder="例如：十一月第一杯热牛奶" required>
+      </div>
+      <div class="md-day-field">
+        <label for="mdDaySubmitTag">内容方向</label>
+        <select id="mdDaySubmitTag">
+          <option>日常记录</option>
+          <option>教程干货</option>
+          <option>城市探索</option>
+          <option>美食烹饪</option>
+          <option>兴趣同好</option>
+        </select>
+      </div>
+      <div class="md-day-field">
+        <label for="mdDaySubmitDesc">内容简介</label>
+        <textarea id="mdDaySubmitDesc" placeholder="简单描述这条影像记录的时间、地点与亮点"></textarea>
+      </div>
+      <button class="md-day-btn md-day-btn--solid" type="submit" style="width:100%;justify-content:center">确认提交</button>
+    </form>
+  </div>
+</div>
+
+<!-- 分享弹窗 -->
+<div class="md-day-modal" id="mdDayShareModal" aria-hidden="true">
+  <div class="md-day-modal-box" role="dialog" aria-modal="true" aria-label="分享页面">
+    <button class="md-day-modal-close" type="button" data-close="mdDayShareModal" aria-label="关闭">×</button>
+    <h3>分享麻豆日历表</h3>
+    <p class="md-day-modal-sub">把这一格推荐给同样喜欢记录的朋友。</p>
+    <div class="md-day-share-row">
+      <button type="button" data-share="微信">微信</button>
+      <button type="button" data-share="微博">微博</button>
+      <button type="button" data-share="QQ">QQ</button>
+      <button type="button" id="mdDayCopyBtn">复制链接</button>
+    </div>
+  </div>
+</div>
+
+<!-- 反馈弹窗 -->
+<div class="md-day-modal" id="mdDayReportModal" aria-hidden="true">
+  <div class="md-day-modal-box" role="dialog" aria-modal="true" aria-label="反馈建议">
+    <button class="md-day-modal-close" type="button" data-close="mdDayReportModal" aria-label="关闭">×</button>
+    <h3>反馈与建议</h3>
+    <p class="md-day-modal-sub">你的意见会直接进入产品与编辑团队的周会。</p>
+    <form id="mdDayReportForm">
+      <div class="md-day-field">
+        <label for="mdDayReportType">反馈类型</label>
+        <select id="mdDayReportType">
+          <option>内容问题</option>
+          <option>功能建议</option>
+          <option>合作咨询</option>
+          <option>其他</option>
+        </select>
+      </div>
+      <div class="md-day-field">
+        <label for="mdDayReportText">具体说明</label>
+        <textarea id="mdDayReportText" placeholder="请描述你遇到的问题或想法" required></textarea>
+      </div>
+      <button class="md-day-btn md-day-btn--solid" type="submit" style="width:100%;justify-content:center">提交反馈</button>
+    </form>
+  </div>
+</div>
+
+<!-- 评论弹窗 -->
+<div class="md-day-modal" id="mdDayCommentModal" aria-hidden="true">
+  <div class="md-day-modal-box" role="dialog" aria-modal="true" aria-label="评论">
+    <button class="md-day-modal-close" type="button" data-close="mdDayCommentModal" aria-label="关闭">×</button>
+    <h3>条目讨论</h3>
+    <p class="md-day-modal-sub">来自社区的简短讨论，保持友善与具体。</p>
+    <div class="md-day-comment-item">
+      <span class="md-day-avatar md-day-avatar--b">林</span>
+      <div><p>这一期的节奏很舒服，看的时候完全没有被推着走的感觉。</p><span>林间有风 · 2 小时前</span></div>
+    </div>
+    <div class="md-day-comment-item">
+      <span class="md-day-avatar md-day-avatar--d">陈</span>
+      <div><p>想问下开头那段晨光的机位是怎么固定的，稳定性很好。</p><span>陈师傅的厨房 · 5 小时前</span></div>
+    </div>
+    <div class="md-day-comment-item">
+      <span class="md-day-avatar md-day-avatar--e">叶</span>
+      <div><p>已经收藏了，准备跟着做一次七天记录，看看能不能坚持下来。</p><span>叶知秋 · 昨天</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var toastEl = document.getElementById('mdDayToast');
+  var toastTimer = null;
+  function showToast(msg){
+    if(!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('is-show');
+    if(toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove('is-show'); }, 2200);
+  }
+
+  /* 移动端导航 */
+  var burger = document.getElementById('mdDayBurger');
+  var nav = document.getElementById('mdDayNav');
+  if(burger && nav){
+    burger.addEventListener('click', function(){
+      var open = nav.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function(e){
+      if(e.target.tagName === 'A'){
+        nav.classList.remove('is-open');
+        burger.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+
+  /* 导航高亮 */
+  var navLinks = document.querySelectorAll('#mdDayNav a');
+  document.querySelectorAll('main section[id]').forEach(function(sec){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          navLinks.forEach(function(a){
+            a.classList.toggle('is-active', a.getAttribute('href') === '#' + en.target.id);
+          });
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px'}).observe(sec);
+  });
+
+  /* 搜索前端反馈 */
+  var searchInput = document.getElementById('mdDaySearchInput');
+  var searchBtn = document.getElementById('mdDaySearchBtn');
+  var searchHint = document.getElementById('mdDaySearchHint');
+  var searchIndex = [
+    '七日手账：把一天一格填满的三十天',
+    '夜行日历：城市里的二十四个小时',
+    '剪辑七日谈：把流水素材剪成故事',
+    '十一月第一杯热牛奶：把早晨拉长二十分钟',
+    '凌晨四点的街角：一家早点摊的三十年',
+    '一荤两素的三十分钟：工作日便当的稳定方案',
+    '第一卷黑白胶片：从装卷到晾干的完整流程',
+    '手机也能拍出稳定画面：五个不买单反的取景习惯'
+  ];
+  function runSearch(){
+    if(!searchHint) return;
+    var kw = (searchInput.value || '').trim();
+    if(!kw){
+      searchHint.innerHTML = '试试搜索：<b>手账</b>、<b>剪辑</b>、<b>城市</b>、<b>胶片</b>';
+      searchHint.classList.add('is-open');
+      return;
+    }
+    var hits = searchIndex.filter(function(t){ return t.indexOf(kw) > -1; });
+    if(hits.length){
+      searchHint.innerHTML = '找到 ' + hits.length + ' 条相关条目：<br>' + hits.slice(0,3).map(function(t){
+        return '· ' + t.replace(new RegExp('(' + kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')','g'), '<b>$1</b>');
+      }).join('<br>');
+      searchHint.classList.add('is-open');
+    }else{
+      searchHint.innerHTML = '暂未找到「<b>' + kw + '</b>」，可以换个关键词，或直接查看 <b>日历视频流</b>。';
+      searchHint.classList.add('is-open');
+    }
+  }
+  if(searchInput){
+    searchInput.addEventListener('input', function(){
+      if(searchInput.value.trim().length >= 1){ runSearch(); }
+      else if(searchHint){ searchHint.classList.remove('is-open'); }
+    });
+    searchInput.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); runSearch(); }
+    });
+    searchInput.addEventListener('focus', function(){
+      if(!searchHint) return;
+      if(!searchHint.innerHTML) runSearch();
+      else searchHint.classList.add('is-open');
+    });
+  }
+  if(searchBtn){ searchBtn.addEventListener('click', runSearch); }
+  document.addEventListener('click', function(e){
+    if(searchHint && !e.target.closest('.md-day-search')){
+      searchHint.classList.remove('is-open');
+    }
+  });
+
+  /* 标签筛选 */
+  var filterWrap = document.getElementById('mdDayFilter');
+  if(filterWrap){
+    filterWrap.addEventListener('click', function(e){
+      var btn = e.target.closest('button[data-filter]');
+      if(!btn) return;
+      filterWrap.querySelectorAll('button').forEach(function(b){ b.classList.remove('is-on'); });
+      btn.classList.add('is-on');
+      var tag = btn.getAttribute('data-filter');
+      var cards = document.querySelectorAll('#mdDayCardGrid .md-day-card');
+      var shown = 0;
+      cards.forEach(function(card){
+        var match = tag === 'all' || card.getAttribute('data-tag') === tag;
+        card.style.display = match ? '' : 'none';
+        if(match) shown++;
+      });
+      showToast(tag === 'all' ? '已显示全部 ' + shown + ' 条日历条目' : '已筛选「' + tag + '」相关条目');
+    });
+  }
+
+  /* 点赞与收藏 */
+  document.querySelectorAll('.md-day-act').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var act = btn.getAttribute('data-act');
+      if(act === 'like'){
+        var b = btn.querySelector('b');
+        var num = parseInt((b.textContent || '0').replace(/,/g,''), 10) || 0;
+        var liked = btn.classList.toggle('is-liked');
+        num += liked ? 1 : -1;
+        b.textContent = num >= 1000 ? num.toLocaleString('en-US') : num;
+        showToast(liked ? '已点赞，感谢你的认可' : '已取消点赞');
+      }else if(act === 'save'){
+        var saved = btn.classList.toggle('is-saved');
+        btn.innerHTML = saved ? '★ 已收藏' : '☆ 收藏';
+        showToast(saved ? '已加入你的日历收藏夹' : '已从收藏夹移除');
+      }
+    });
+  });
+
+  /* 弹窗通用 */
+  function openModal(id){
+    var m = document.getElementById(id);
+    if(!m) return;
+    m.classList.add('is-open');
+    m.setAttribute('aria-hidden','false');
+  }
+  function closeModal(id){
+    var m = document.getElementById(id);
+    if(!m) return;
+    m.classList.remove('is-open');
+    m.setAttribute('aria-hidden','true');
+  }
+  document.querySelectorAll('[data-close]').forEach(function(b){
+    b.addEventListener('click', function(){ closeModal(b.getAttribute('data-close')); });
+  });
+  document.querySelectorAll('.md-day-modal').forEach(function(m){
+    m.addEventListener('click', function(e){
+      if(e.target === m){ closeModal(m.id); }
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      document.querySelectorAll('.md-day-modal.is-open').forEach(function(m){ closeModal(m.id); });
+    }
+  });
+
+  var submitBtn = document.getElementById('mdDaySubmitBtn');
+  if(submitBtn){ submitBtn.addEventListener('click', function(){ openModal('mdDaySubmitModal'); }); }
+  var shareBtn = document.getElementById('mdDayShareBtn');
+  if(shareBtn){ shareBtn.addEventListener('click', function(){ openModal('mdDayShareModal'); }); }
+  var reportBtn = document.getElementById('mdDayReportBtn');
+  if(reportBtn){ reportBtn.addEventListener('click', function(){ openModal('mdDayReportModal'); }); }
+
+  /* 表单提交 */
+  var submitForm = document.getElementById('mdDaySubmitForm');
+  if(submitForm){
+    submitForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      closeModal('mdDaySubmitModal');
+      showToast('投稿已提交，编辑部将在三个工作日内回复');
+      submitForm.reset();
+    });
+  }
+  var reportForm = document.getElementById('mdDayReportForm');
+  if(reportForm){
+    reportForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      closeModal('mdDayReportModal');
+      showToast('反馈已收到，感谢你的建议');
+      reportForm.reset();
+    });
+  }
+
+  /* 分享 */
+  document.querySelectorAll('[data-share]').forEach(function(b){
+    b.addEventListener('click', function(){
+      showToast('已生成分享到 ' + b.getAttribute('data-share') + ' 的内容');
+    });
+  });
+  var copyBtn = document.getElementById('mdDayCopyBtn');
+  if(copyBtn){
+    copyBtn.addEventListener('click', function(){
+      var link = 'https://matriccalendar.example/';
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(link).then(function(){
+          showToast('链接已复制，可以分享给朋友了');
+        }).catch(function(){
+          showToast('复制失败，请手动选择文本复制');
+        });
+      }else{
+        showToast('链接已复制，可以分享给朋友了');
+      }
+    });
+  }
+
+  /* 创作灵感 */
+  var inspireEl = document.getElementById('mdDayInspireBtn');
+  if(inspireEl){
+    var inspireList = [
+      '灵感：用「七个清晨」做一周系列，固定机位、固定时长，差异自会显现。',
+      '灵感：试着给每一条视频加一句手写日期，它会让整条时间线更有温度。',
+      '灵感：把一个月里最普通的一天完整记录下来，往往比特殊日子更打动人。',
+      '灵感：找一个固定参照物，例如窗外的一棵树，用三十天记录它的变化。'
+    ];
+    var inspireIdx = 0;
+    inspireEl.addEventListener('click', function(){
+      showToast(inspireList[inspireIdx % inspireList.length]);
+      inspireIdx++;
+    });
+  }
+
+  /* 回到顶部 */
+  var toTop = document.getElementById('mdDayToTop');
+  window.addEventListener('scroll', function(){
+    if(!toTop) return;
+    if(window.scrollY > 520){ toTop.classList.add('is-show'); }
+    else{ toTop.classList.remove('is-show'); }
+  }, {passive:true});
+  if(toTop){
+    toTop.addEventListener('click', function(){
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  }
+
+  /* 卡片点击打开讨论 */
+  document.querySelectorAll('.md-day-card').forEach(function(card){
+    card.addEventListener('click', function(e){
+      if(e.target.closest('.md-day-act')) return;
+      openModal('mdDayCommentModal');
+    });
+  });
+
+  /* 评论计数动画（首次进入视口时） */
+  var counted = false;
+  var stats = document.querySelectorAll('.md-day-stat-num');
+  if(stats.length && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting && !counted){
+          counted = true;
+          stats.forEach(function(el){
+            var target = parseInt(el.getAttribute('data-count'), 10);
+            if(!target) return;
+            var start = 0, step = Math.max(1, Math.round(target / 36));
+            var timer = setInterval(function(){
+              start += step;
+              if(start >= target){
+                start = target;
+                clearInterval(timer);
+                el.textContent = target >= 1000 ? target.toLocaleString('en-US') + '+' : target + (target === 27 ? '' : '+');
+              }else{
+                el.textContent = start.toLocaleString('en-US') + '+';
+              }
+            }, 26);
+          });
+          io.disconnect();
+        }
+      });
+    }, {threshold:.4});
+    io.observe(stats[0]);
+  }
+
+})();
+</script>
+</body>
+                </html>
